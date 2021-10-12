@@ -1,5 +1,6 @@
 package ua.com.alevel;
 
+import ua.com.alevel.endLessons.EndLessons;
 import ua.com.alevel.sumNumbers.SumNumbersFromString;
 import ua.com.alevel.takesAndSortingChar.TakesAndSortingCharWithString;
 
@@ -24,11 +25,15 @@ public class ProgramRun {
                         takesAndSortingCharWithString.run(reader);
                     } break;
                     case "3" : {
-
+                        EndLessons endLessons = new EndLessons();
+                        endLessons.run(reader);
                     } break;
                     case "0" : {
                         System.exit(0);
                     } break;
+                    default:{
+                        run();
+                    }
                 }
             }
         } catch (IOException e) {
