@@ -2,7 +2,6 @@ package ua.com.alevel.endLessons;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class EndLessons {
     private int numberLesson = 0;
@@ -11,7 +10,6 @@ public class EndLessons {
 
     public void run(BufferedReader reader) throws IOException {
         readString(reader);
-        //endTime();
     }
 
     private void endTime() {
