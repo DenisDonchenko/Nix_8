@@ -7,10 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SumNumbersFromString {
-    private static double number;
-    private static String inputString;
+    private double number;
+    private String inputString;
 
-    private static void readString(BufferedReader reader) throws IOException {
+    private void readString(BufferedReader reader) throws IOException {
         try {
 
             System.out.println("This task takes a string from the console and extracts all the numbers and finds their sum.\n" +
@@ -26,7 +26,7 @@ public class SumNumbersFromString {
         }
     }
 
-    public static void run(BufferedReader reader) throws IOException {
+    public void run(BufferedReader reader) throws IOException {
 
         readString(reader);
         Pattern pattern = Pattern.compile("[+-]?((\\d+\\.?\\d*)|(\\.\\d+))");

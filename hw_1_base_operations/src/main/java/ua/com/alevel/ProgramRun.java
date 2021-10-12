@@ -1,6 +1,7 @@
 package ua.com.alevel;
 
 import ua.com.alevel.sumNumbers.SumNumbersFromString;
+import ua.com.alevel.takesAndSortingChar.TakesAndSortingCharWithString;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,10 +16,12 @@ public class ProgramRun {
             while ((event = reader.readLine()) != null) {
                 switch (event) {
                     case "1" : {
-
+                        SumNumbersFromString sumNumbersFromString = new SumNumbersFromString();
+                        sumNumbersFromString.run(reader);
                     } break;
                     case "2" : {
-
+                        TakesAndSortingCharWithString takesAndSortingCharWithString = new TakesAndSortingCharWithString();
+                        takesAndSortingCharWithString.run(reader);
                     } break;
                     case "3" : {
 
