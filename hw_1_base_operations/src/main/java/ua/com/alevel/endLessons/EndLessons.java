@@ -31,9 +31,10 @@ public class EndLessons {
             endTime();
         } catch (NumberFormatException e) {
             System.out.println("Input Error. Enter not a number");
+            readString(reader);
            } catch (Exception e) {
             System.out.println("Input Error. Please enter a number from 1 to 10");
-
+            readString(reader);
         }
     }
 }

@@ -1,7 +1,11 @@
 package ua.com.alevel.sumNumbers;
 
+import ua.com.alevel.ProgramRun;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,23 +26,32 @@ public class SumNumbersFromString {
             }
         } catch (Exception e) {
             System.out.println("String is empty");
+            ProgramRun.run();
         }
+        sumNumber();
     }
 
-    public void run(BufferedReader reader) throws IOException {
-
-        readString(reader);
+    private void sumNumber() {
+        List<Double> numbersFromString = new ArrayList<>();
         Pattern pattern = Pattern.compile("[+-]?((\\d+\\.?\\d*)|(\\.\\d+))");
         Matcher matcher = pattern.matcher(inputString);
 
-        System.out.print("This string has next numbers : ");
         while (matcher.find()) {
             double numberWithString = Double.parseDouble(matcher.group());
-            System.out.print(numberWithString + ", ");
+            numbersFromString.add(numberWithString);
             number += numberWithString;
-
         }
-        System.out.println("\nResult = " + number);
-        number = 0;
+        if (numbersFromString.isEmpty()) {
+            System.out.println("Numbers are missing in the string - " + inputString);
+        } else {
+            System.out.print("This string has next numbers : " + numbersFromString);
+            System.out.println("\nResult = " + number);
+            number = 0;
+        }
+
+    }
+
+    public void run(BufferedReader reader) throws IOException {
+        readString(reader);
     }
 }

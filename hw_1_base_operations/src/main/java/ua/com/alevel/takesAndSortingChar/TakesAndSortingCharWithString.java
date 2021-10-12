@@ -1,5 +1,7 @@
 package ua.com.alevel.takesAndSortingChar;
 
+import ua.com.alevel.ProgramRun;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
@@ -43,6 +45,7 @@ public class TakesAndSortingCharWithString {
             }
         } catch (Exception e) {
             System.out.println(" String is empty");
+            ProgramRun.run();
         }
 
         charArray = Arrays.stream(inputString.split(""))

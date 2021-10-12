@@ -42,10 +42,10 @@ public class ProgramRun {
     }
 
     private static void preview() {
-        System.out.println("if you want run first task, please select 1");
-        System.out.println("if you want run second task, please select 2");
-        System.out.println("if you want run second task, please select 3");
-        System.out.println("if you want run exit task, please select 0");
+        System.out.println("if you want run first task (Sum numbers from string), please select 1");
+        System.out.println("if you want run second task(Count char from string), please select 2");
+        System.out.println("if you want run third task(End Lessons), please select 3");
+        System.out.println("if you want run exit, please select 0");
         System.out.println("Make your choice:");
         System.out.println();
     }
