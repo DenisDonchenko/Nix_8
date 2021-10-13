@@ -1,15 +1,19 @@
 package ua.com.alevel.endLessons;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 
 public class EndLessons {
     private int numberLesson = 0;
     private int hour;
     private int minute;
+    private BufferedReader reader;
 
-    public void run(BufferedReader reader) throws IOException {
-        readString(reader);
+    public EndLessons(BufferedReader reader){
+        this.reader = reader;
+    }
+
+    public void run(){
+        readString();
     }
 
     private void endTime() {
@@ -19,7 +23,7 @@ public class EndLessons {
         System.out.println(hour + ":" + minute);
     }
 
-    private void readString(BufferedReader reader) throws IOException {
+    private void readString()  {
         try {
             System.out.println("\n This task takes lesson number and determines when the specified lesson ends." +
                     "\n Enter number lessons");
@@ -31,10 +35,10 @@ public class EndLessons {
             endTime();
         } catch (NumberFormatException e) {
             System.out.println("Input Error. Enter not a number");
-            readString(reader);
+            readString();
            } catch (Exception e) {
             System.out.println("Input Error. Please enter a number from 1 to 10");
-            readString(reader);
+            readString();
         }
     }
 }

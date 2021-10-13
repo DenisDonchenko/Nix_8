@@ -3,7 +3,6 @@ package ua.com.alevel.sumNumbers;
 import ua.com.alevel.ProgramRun;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,7 +11,7 @@ import java.util.regex.Pattern;
 public class SumNumbersFromString {
     private double number;
     private String inputString;
-    private static BufferedReader reader;
+    private BufferedReader reader;
 
     public SumNumbersFromString(BufferedReader reader) {
         this.reader = reader;
@@ -54,9 +53,7 @@ public class SumNumbersFromString {
             number = 0;
             ProgramRun.isExit("1");
         }
-
     }
-
     public void run() {
         readString();
     }

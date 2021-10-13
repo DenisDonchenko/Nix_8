@@ -21,12 +21,12 @@ public class ProgramRun {
                         sumNumbersFromString.run();
                     } break;
                     case "2" : {
-                        TakesAndSortingCharWithString takesAndSortingCharWithString = new TakesAndSortingCharWithString();
-                        takesAndSortingCharWithString.run(reader);
+                        TakesAndSortingCharWithString takesAndSortingCharWithString = new TakesAndSortingCharWithString(reader);
+                        takesAndSortingCharWithString.run();
                     } break;
                     case "3" : {
-                        EndLessons endLessons = new EndLessons();
-                        endLessons.run(reader);
+                        EndLessons endLessons = new EndLessons(reader);
+                        endLessons.run();
                     } break;
                     case "0" : {
                         System.exit(0);
