@@ -17,8 +17,8 @@ public class ProgramRun {
             while ((event = reader.readLine()) != null) {
                 switch (event) {
                     case "1" : {
-                        SumNumbersFromString sumNumbersFromString = new SumNumbersFromString();
-                        sumNumbersFromString.run(reader);
+                        SumNumbersFromString sumNumbersFromString = new SumNumbersFromString(reader);
+                        sumNumbersFromString.run();
                     } break;
                     case "2" : {
                         TakesAndSortingCharWithString takesAndSortingCharWithString = new TakesAndSortingCharWithString();
@@ -40,9 +40,12 @@ public class ProgramRun {
             e.printStackTrace();
         }
     }
-
+    public static void isExit(String numberTask) {
+        System.out.println("\nIf you want continue, please select " +numberTask +
+                "\nIf you want exit to the main menu, please select enter\n"  );
+    }
     private static void preview() {
-        System.out.println("if you want run first task (Sum numbers from string), please select 1");
+        System.out.println("\nif you want run first task (Sum numbers from string), please select 1");
         System.out.println("if you want run second task(Count char from string), please select 2");
         System.out.println("if you want run third task(End Lessons), please select 3");
         System.out.println("if you want run exit, please select 0");

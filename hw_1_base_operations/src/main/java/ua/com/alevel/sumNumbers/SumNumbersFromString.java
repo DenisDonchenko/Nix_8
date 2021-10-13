@@ -12,8 +12,13 @@ import java.util.regex.Pattern;
 public class SumNumbersFromString {
     private double number;
     private String inputString;
+    private static BufferedReader reader;
 
-    private void readString(BufferedReader reader) throws IOException {
+    public SumNumbersFromString(BufferedReader reader) {
+        this.reader = reader;
+    }
+
+    private void readString() {
         try {
 
             System.out.println("This task takes a string from the console and extracts all the numbers and finds their sum.\n" +
@@ -47,11 +52,12 @@ public class SumNumbersFromString {
             System.out.print("This string has next numbers : " + numbersFromString);
             System.out.println("\nResult = " + number);
             number = 0;
+            ProgramRun.isExit("1");
         }
 
     }
 
-    public void run(BufferedReader reader) throws IOException {
-        readString(reader);
+    public void run() {
+        readString();
     }
 }
