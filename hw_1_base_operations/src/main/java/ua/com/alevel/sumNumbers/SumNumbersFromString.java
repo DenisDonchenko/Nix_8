@@ -3,6 +3,7 @@ package ua.com.alevel.sumNumbers;
 import ua.com.alevel.ProgramRun;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,9 +26,9 @@ public class SumNumbersFromString {
                     "Enter your string : ");
             inputString = reader.readLine();
             if (inputString.isEmpty()) {
-                throw new Exception();
+                throw new NullPointerException();
             }
-        } catch (Exception e) {
+        } catch (NullPointerException | IOException e) {
             System.out.println("String is empty");
             ProgramRun.isExit("1");
         }
@@ -48,12 +49,13 @@ public class SumNumbersFromString {
             System.out.println("Numbers are missing in the string - " + inputString);
             ProgramRun.isExit("1");
         } else {
-            System.out.print("This string has next numbers : " + numbersFromString);
-            System.out.printf("\nResult = %.2f",number);
+            System.out.print("This string(" + inputString + ") has next numbers : " + numbersFromString);
+            System.out.printf("\nResult = %.2f", number);
             number = 0;
             ProgramRun.isExit("1");
         }
     }
+
     public void run() {
         readString();
     }

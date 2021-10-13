@@ -16,22 +16,26 @@ public class ProgramRun {
         try {
             while ((event = reader.readLine()) != null) {
                 switch (event) {
-                    case "1" : {
+                    case "1": {
                         SumNumbersFromString sumNumbersFromString = new SumNumbersFromString(reader);
                         sumNumbersFromString.run();
-                    } break;
-                    case "2" : {
+                    }
+                    break;
+                    case "2": {
                         TakesAndSortingCharWithString takesAndSortingCharWithString = new TakesAndSortingCharWithString(reader);
                         takesAndSortingCharWithString.run();
-                    } break;
-                    case "3" : {
+                    }
+                    break;
+                    case "3": {
                         EndLessons endLessons = new EndLessons(reader);
                         endLessons.run();
-                    } break;
-                    case "0" : {
+                    }
+                    break;
+                    case "0": {
                         System.exit(0);
-                    } break;
-                    default:{
+                    }
+                    break;
+                    default: {
                         run();
                     }
                 }
@@ -40,16 +44,17 @@ public class ProgramRun {
             e.printStackTrace();
         }
     }
+
     public static void isExit(String numberTask) {
-        System.out.println("\nIf you want continue, please select " +numberTask +
-                "\nIf you want exit to the main menu, please select enter\n"  );
+        System.out.println("\nIf you want continue, please select " + numberTask +
+                "\nIf you want exit to the main menu, please select enter.");
     }
+
     private static void preview() {
-        System.out.println("\nif you want run first task (Sum numbers from string), please select 1");
+        System.out.println("if you want run first task (Sum numbers from string), please select 1");
         System.out.println("if you want run second task(Count char from string), please select 2");
         System.out.println("if you want run third task(End Lessons), please select 3");
         System.out.println("if you want run exit, please select 0");
         System.out.println("Make your choice:");
-        System.out.println();
     }
 }

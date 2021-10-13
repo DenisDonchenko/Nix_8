@@ -16,9 +16,8 @@ public class TakesAndSortingCharWithString {
         this.reader = reader;
     }
 
-    public void run(){
+    public void run() {
         readString();
-        countCharacter();
     }
 
     private void countCharacter() {
@@ -31,6 +30,7 @@ public class TakesAndSortingCharWithString {
             System.out.println(entry.getKey() + " - "
                     + entry.getValue());
         }
+
         ProgramRun.isExit("2");
     }
 
@@ -38,25 +38,37 @@ public class TakesAndSortingCharWithString {
         return (int) Arrays.stream(inputString.split("")).filter(s -> s.equals(String.valueOf(i))).count();
     }
 
+    public boolean isCharacter() {
+        return charArray.length == 0;
+    }
+
     private void readString() {
         try {
-            System.out.println("\n This task takes a string from the console and extracts all characters\n" +
-                    " Latin / Cyrillic and sorts them by specifying the number of occurrences of each character. " +
-                    "\n Enter your string - ");
+            System.out.println("\nThis task takes a string from the console and extracts all characters\n" +
+                    "Latin / Cyrillic and sorts them by specifying the number of occurrences of each character. " +
+                    "\nEnter your string - ");
             inputString = reader.readLine().toLowerCase(Locale.ROOT);
-            if(inputString.isEmpty()){
-                throw new Exception();
+            if (inputString.isEmpty()) {
+                throw new NullPointerException("String is empty");
+            } else {
+
+                charArray = Arrays.stream(inputString.split(""))
+                        .filter(c -> c.matches("\\p{L}"))
+                        .collect(Collectors.joining())
+                        .toCharArray();
+                if (isCharacter()) {
+                    System.out.println("There are no letters in this string.");
+                    ProgramRun.isExit("2");
+                } else {
+                    Arrays.sort(charArray);
+                    inputString = String.valueOf(charArray);
+                    countCharacter();
+                }
             }
         } catch (Exception e) {
-            System.out.println(" String is empty");
+            System.out.println("String is empty");
             ProgramRun.isExit("2");
         }
 
-        charArray = Arrays.stream(inputString.split(""))
-                .filter(c -> c.matches("\\p{L}"))
-                .collect(Collectors.joining())
-                .toCharArray();
-        Arrays.sort(charArray);
-        inputString = String.valueOf(charArray);
     }
 }
