@@ -49,7 +49,7 @@ public class TakesAndSortingCharWithString {
             }
         } catch (Exception e) {
             System.out.println(" String is empty");
-            ProgramRun.run();
+            ProgramRun.isExit("2");
         }
 
         charArray = Arrays.stream(inputString.split(""))

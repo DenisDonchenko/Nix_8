@@ -1,5 +1,7 @@
 package ua.com.alevel.endLessons;
 
+import ua.com.alevel.ProgramRun;
+
 import java.io.BufferedReader;
 
 public class EndLessons {
@@ -35,10 +37,10 @@ public class EndLessons {
             endTime();
         } catch (NumberFormatException e) {
             System.out.println("Input Error. Enter not a number");
-            readString();
+            ProgramRun.isExit("3");
            } catch (Exception e) {
             System.out.println("Input Error. Please enter a number from 1 to 10");
-            readString();
+            ProgramRun.isExit("3");
         }
     }
 }
