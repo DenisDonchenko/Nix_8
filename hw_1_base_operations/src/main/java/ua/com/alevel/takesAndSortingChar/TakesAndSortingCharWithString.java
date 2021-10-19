@@ -3,6 +3,7 @@ package ua.com.alevel.takesAndSortingChar;
 import ua.com.alevel.ProgramRun;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ public class TakesAndSortingCharWithString {
         this.reader = reader;
     }
 
-    public void run() {
+    public void run() throws IOException{
         readString();
     }
 
@@ -42,14 +43,15 @@ public class TakesAndSortingCharWithString {
         return charArray.length == 0;
     }
 
-    private void readString() {
-        try {
+    private void readString() throws IOException {
+
             System.out.println("\nThis task takes a string from the console and extracts all characters\n" +
                     "Latin / Cyrillic and sorts them by specifying the number of occurrences of each character. " +
                     "\nEnter your string - ");
             inputString = reader.readLine().toLowerCase(Locale.ROOT);
             if (inputString.isEmpty()) {
-                throw new NullPointerException("String is empty");
+                System.out.println("String is empty");
+                ProgramRun.isExit("2");
             } else {
 
                 charArray = Arrays.stream(inputString.split(""))
@@ -65,10 +67,6 @@ public class TakesAndSortingCharWithString {
                     countCharacter();
                 }
             }
-        } catch (Exception e) {
-            System.out.println("String is empty");
-            ProgramRun.isExit("2");
-        }
 
     }
 }
