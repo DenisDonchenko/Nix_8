@@ -1,4 +1,4 @@
-package ua.com.alevel.entite;
+package ua.com.alevel.entity;
 
 import java.time.LocalDate;
 import java.util.Objects;
