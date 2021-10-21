@@ -20,7 +20,6 @@
     </properties>
 
 
-
     <build>
         <finalName>hw_1_base_operations</finalName>
         <plugins>

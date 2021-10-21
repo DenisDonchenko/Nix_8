@@ -1,7 +1,6 @@
 package ua.com.alevel.entity;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class User {
@@ -10,25 +9,6 @@ public class User {
     private LocalDate birthday;
     private String phoneNumber;
     private String email;
-
-
-    public User() {
-    }
-
-    public User(String name, LocalDate birthday, String phoneNumber, String email) {
-        this.name = name;
-        this.birthday = birthday;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-
-    public User(Long id, String name, LocalDate birthday, String phoneNumber, String email) {
-        this.id = id;
-        this.name = name;
-        this.birthday = birthday;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
 
     public Long getId() {
         return id;
@@ -72,11 +52,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "id=" + id +
+        return "User{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", birthday=" + birthday.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
+                ", birthday=" + birthday +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'';
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Override
