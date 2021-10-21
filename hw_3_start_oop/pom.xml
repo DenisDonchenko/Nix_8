@@ -17,8 +17,17 @@
         <maven.shade.plugin.version>3.2.0</maven.shade.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
+        <apache.email.validator.version>1.4.0</apache.email.validator.version>
     </properties>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${apache.email.validator.version}</version>
+        </dependency>
 
+    </dependencies>
     <build>
         <finalName>start_oop</finalName>
         <plugins>
