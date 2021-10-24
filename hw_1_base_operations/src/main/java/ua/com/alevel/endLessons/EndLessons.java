@@ -5,6 +5,7 @@ import ua.com.alevel.ProgramRun;
 import java.io.BufferedReader;
 
 public class EndLessons {
+
     private int numberLesson = 0;
     private int hour;
     private int minute;
@@ -23,7 +24,6 @@ public class EndLessons {
         hour = numberLesson / 60 + 9;
         minute = numberLesson % 60;
         System.out.println(hour + ":" + minute);
-
         ProgramRun.isExit("3");
     }
 

@@ -14,7 +14,6 @@ public class ProgramRun {
     private static int lastIndex = 0;
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-
     public static void run() {
         preview();
         String event;

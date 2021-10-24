@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SumNumbersFromString {
+
     private double number;
     private String inputString;
     private BufferedReader reader;
