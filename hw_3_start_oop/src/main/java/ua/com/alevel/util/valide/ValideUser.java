@@ -28,7 +28,7 @@ public final class ValideUser {
             isValide = false;
             System.out.println(settings.getString("user.name.format"));
         }
-        if (name.length()<2 || name.length()>32 ){
+        if (name.length() < 2 || name.length() > 32) {
             isValide = false;
             System.out.println(settings.getString("user.name.length.format"));
         }
@@ -61,6 +61,7 @@ public final class ValideUser {
         }
         return isValide;
     }
+
     public static boolean valideBirthday(LocalDate birthday) {
         boolean isValide = true;
 

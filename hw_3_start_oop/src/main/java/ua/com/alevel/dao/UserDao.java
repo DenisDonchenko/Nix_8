@@ -3,8 +3,6 @@ package ua.com.alevel.dao;
 import ua.com.alevel.db.UserDB;
 import ua.com.alevel.entity.User;
 
-import java.time.LocalDate;
-
 public class UserDao {
 
     public void create(User user) {
@@ -27,9 +25,13 @@ public class UserDao {
         return UserDB.getInstance().findAll();
     }
 
-    public User findByEmail(String email){ return  UserDB.getInstance().findByEmail(email); }
+    public User findByEmail(String email) {
+        return UserDB.getInstance().findByEmail(email);
+    }
 
-    public User findByPhoneNumber(String phoneNumber){ return  UserDB.getInstance().findByPhone(phoneNumber);}
+    public User findByPhoneNumber(String phoneNumber) {
+        return UserDB.getInstance().findByPhone(phoneNumber);
+    }
 
 
 }

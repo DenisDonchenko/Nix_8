@@ -32,6 +32,7 @@ public class ProgramRun {
             System.out.println("problem: = " + e.getMessage());
         }
     }
+
     private static void runNavigation() {
         System.out.println();
         System.out.println("if you want create user, please enter 1");
@@ -42,6 +43,7 @@ public class ProgramRun {
         System.out.println("if you want exit, please enter 0");
         System.out.println();
     }
+
     private static void crud(String position) {
         switch (position) {
             case "1":
@@ -68,39 +70,43 @@ public class ProgramRun {
     private static String readName() throws IOException {
         System.out.println("Please, enter your name");
         String name = reader.readLine();
-        if (!ValideUser.valideName(name)){
+        if (!ValideUser.valideName(name)) {
             readName();
         }
         return name;
     }
+
     private static String readPhoneNumber() throws IOException {
         System.out.println("Please, enter your phone number(09********)");
         String phoneNumber = reader.readLine();
-        if (!ValideUser.validePhoneNumber(phoneNumber)){
+        if (!ValideUser.validePhoneNumber(phoneNumber)) {
             readPhoneNumber();
         }
         return phoneNumber;
     }
+
     private static String readEmail() throws IOException {
         System.out.println("Please, enter your email");
         String email = reader.readLine();
-        if (!ValideUser.valideEmail(email)){
+        if (!ValideUser.valideEmail(email)) {
             readEmail();
         }
         return email;
     }
+
     private static LocalDate readBirthday() throws IOException {
         System.out.println("Please, enter your date birthday.");
         LocalDate birthday = null;
         try {
-           birthday = addDate(reader.readLine());
+            birthday = addDate(reader.readLine());
 
-      } catch (DateTimeParseException exceptionDate){
-              System.out.println("Date input error, date must be entered in the format dd.MM.yyyy.");
-              readBirthday();
-          }
+        } catch (DateTimeParseException exceptionDate) {
+            System.out.println("Date input error, date must be entered in the format dd.MM.yyyy.");
+            readBirthday();
+        }
         return birthday;
     }
+
     private static void createUser() {
         System.out.println("Create user profile");
         User newUser = new User();
@@ -122,8 +128,9 @@ public class ProgramRun {
             System.out.println("Input error.");
             createUser();
         }
-       controller.create(newUser);
+        controller.create(newUser);
     }
+
     private static void updateUser() {
         System.out.println("Update user profile");
         User newUser = new User();
@@ -149,9 +156,10 @@ public class ProgramRun {
             System.out.println("Input error.");
             updateUser();
         }
-        controller.update(newUser,id);
+        controller.update(newUser, id);
     }
-    private static void deleteUser(){
+
+    private static void deleteUser() {
         System.out.println("Delete user profile");
         System.out.println("Please, enter id");
         try {
@@ -161,6 +169,7 @@ public class ProgramRun {
             e.printStackTrace();
         }
     }
+
     private static void findById() {
         System.out.println("Find user by ID.");
         try {
@@ -176,7 +185,6 @@ public class ProgramRun {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return LocalDate.parse(date, formatter1);
     }
-
 
 
 }
