@@ -17,7 +17,19 @@
         <maven.shade.plugin.version>3.2.0</maven.shade.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
+        <maven.apache.valide.email>1.4.1</maven.apache.valide.email>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${maven.apache.valide.email}</version>
+        </dependency>
+
+
+    </dependencies>
 
     <build>
         <finalName>start_oop</finalName>
@@ -32,6 +44,9 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
