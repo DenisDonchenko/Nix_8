@@ -2,9 +2,6 @@ package ua.com.alevel.db;
 
 import ua.com.alevel.entity.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserDB {
     private final User[] users;
     private static UserDB instance;
@@ -51,13 +48,12 @@ public class UserDB {
     public User findById(Long id) {
         User isUser = null;
         try {
-        for (User user : users) {
-            if (user.getId() == id)
-                isUser =  user;
-        }
+            for (User user : users) {
+                if (user.getId() == id)
+                    isUser = user;
+            }
             return isUser;
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return isUser;
         }
     }
@@ -68,13 +64,13 @@ public class UserDB {
             for (User user : users) {
                 if (user.getEmail().contains(email))
                     isUser = user;
-        }
-        return isUser;
-        }
-        catch (NullPointerException e){
+            }
+            return isUser;
+        } catch (NullPointerException e) {
             return isUser;
         }
     }
+
     public User findByPhone(String phoneNumber) {
         User isUser = null;
         try {
@@ -83,11 +79,11 @@ public class UserDB {
                     isUser = user;
             }
             return isUser;
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return isUser;
         }
     }
+
     private int findIndexById(Long id) {
 
         User user = findById(id);
