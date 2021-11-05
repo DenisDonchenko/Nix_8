@@ -16,7 +16,7 @@ public final class ValideCoordinates {
             System.out.println("Error input coordinates. Coordinates must be written in the form С6 or h4!!!");
             return false;
         }
-        if (coordinates.isBlank()) {
+        if (coordinates.isEmpty()) {
             System.out.println("Coordinates is empty!!!");
             return false;
         }
