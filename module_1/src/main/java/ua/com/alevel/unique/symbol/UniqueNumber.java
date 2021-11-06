@@ -5,17 +5,22 @@ import java.io.IOException;
 import java.util.*;
 
 public class UniqueNumber {
-    private static List<String> arrayNumber = new ArrayList<>();
+    private List<String> arrayNumber = new ArrayList<>();
+    private BufferedReader reader;
 
-    public static void start(BufferedReader reader) {
+    public UniqueNumber(BufferedReader reader) {
+        this.reader = reader;
+    }
+
+    public void run() {
         preview();
-        readArray(reader);
+        readArray();
         printArray();
         System.out.println("\nCount unique number - " + uniqueCount());
         arrayNumber.removeAll(arrayNumber);
     }
 
-    private static int uniqueCount() {
+    private int uniqueCount() {
         Set<String> mySet = new HashSet<>();
         for (String x : arrayNumber) {
             mySet.add(x);
@@ -23,19 +28,19 @@ public class UniqueNumber {
         return mySet.size();
     }
 
-    private static void printArray() {
+    private void printArray() {
         System.out.print("Array of numbers - " + arrayNumber);
     }
 
-    private static void readArray(BufferedReader reader) {
+    private void readArray() {
         System.out.println("Enter numbers separated by a space (Example - 1 2 3 4 5)");
         String inputArrayNumber = "";
 
         try {
             inputArrayNumber = reader.readLine().trim();
             if (inputArrayNumber.isEmpty()) {
-                System.out.println("Not is empty\n");
-                readArray(reader);
+                System.out.println("Error!!! Input empty \n");
+                readArray();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,17 +50,16 @@ public class UniqueNumber {
 
         } else {
             System.out.println("\nOnly numbers and spaces are allowed!!!\n");
-            readArray(reader);
+            readArray();
         }
     }
 
-    private static void preview() {
+    private void preview() {
         System.out.println("\nThis application returns the number of unique characters!!!");
         System.out.println("if you want exit, select - 0");
     }
 
-    private static boolean isNumbers(String arrayNumber) {
+    private boolean isNumbers(String arrayNumber) {
         return arrayNumber.matches("[0-9.\\s+]+");
-
     }
 }

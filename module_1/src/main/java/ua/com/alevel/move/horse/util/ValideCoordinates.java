@@ -12,12 +12,12 @@ public final class ValideCoordinates {
         if (coordinates.equals("0")) {
             ProgramRun.run();
         }
-        if (!coordinates.matches("[A-Ha-h]([1-8])${2}")) {
-            System.out.println("Error input coordinates. Coordinates must be written in the form С6 or h4!!!");
-            return false;
-        }
         if (coordinates.isEmpty()) {
             System.out.println("Coordinates is empty!!!");
+            return false;
+        }
+        if (!coordinates.matches("[A-Ha-h]([1-8])${2}")) {
+            System.out.println("Error input coordinates. Coordinates must be written in the form С6 or h4!!!");
             return false;
         }
         return true;
