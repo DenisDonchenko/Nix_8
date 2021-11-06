@@ -9,14 +9,14 @@ import java.util.Locale;
 import java.util.Map;
 
 public class MoveHorse {
-    private static int indexColumn = 0;
-    private static int indexRow = 0;
-    private static int lastIndexColumn;
-    private static int lastIndexRow;
-    private static String inputCoordinates = "";
+    private int indexColumn = 0;
+    private int indexRow = 0;
+    private int lastIndexColumn;
+    private int lastIndexRow;
+    private String inputCoordinates = "";
+    private BufferedReader reader;
 
-
-    private static String[][] chessBoard =
+    private String[][] chessBoard =
             {
                     {"·", "·", "·", "·", "·", "·", "·", "·",},
                     {"·", "·", "·", "·", "·", "·", "·", "·",},
@@ -28,8 +28,7 @@ public class MoveHorse {
                     {"·", "·", "·", "·", "·", "·", "·", "·",}
             };
 
-    private static final Map<String, Integer> indexColumnChar =
-            new HashMap<>() {{
+    private final Map<String, Integer> indexColumnChar = new HashMap<>() {{
                 put("A", 1);
                 put("B", 2);
                 put("C", 3);
@@ -40,34 +39,38 @@ public class MoveHorse {
                 put("H", 8);
             }};
 
-    public static void run(BufferedReader reader) {
+    public MoveHorse(BufferedReader reader) {
+        this.reader = reader;
+    }
+
+    public void run() {
         preview();
         printBoard();
         while (true) {
-            readCoordinates(reader);
+            readCoordinates();
             makeMove();
         }
     }
 
-    private static void readCoordinates(BufferedReader reader) {
+    private void readCoordinates() {
 
-        System.out.println("Pleas enter coordinates : ");
+        System.out.println("Please enter coordinates : ");
         inputCoordinates = "";
         try {
             inputCoordinates = reader.readLine();
             if (!ValideCoordinates.checkCorrectnessInput(inputCoordinates)) {
-                throw new IOException();
+                throw new Exception();
             }
 
             saveCoordinates();
 
             if (!ValideCoordinates.checkCorrectnessMove(lastIndexRow, lastIndexColumn, indexColumn, indexRow)) {
-                throw new IOException();
+                throw new Exception();
             }
 
-        } catch (IOException e) {
+        } catch (Exception ex) {
             inputCoordinates = "";
-            readCoordinates(reader);
+            readCoordinates();
         }
 
         ValideCoordinates.isStart = true;
@@ -76,18 +79,18 @@ public class MoveHorse {
         lastIndexRow = indexRow;
     }
 
-    private static void saveCoordinates() {
+    private void saveCoordinates() {
         indexColumn = indexColumnChar.get(String.valueOf(inputCoordinates.charAt(0)).toUpperCase(Locale.ROOT)) - 1;
         indexRow = 8 - Integer.parseInt(String.valueOf(inputCoordinates.charAt(1)));
     }
 
-    private static void makeMove() {
+    private void makeMove() {
         chessBoard[indexRow][indexColumn] = "Х";
         printBoard();
         chessBoard[indexRow][indexColumn] = "·";
     }
 
-    private static void printBoard() {
+    private void printBoard() {
         int indexNumber = 8;
 
         System.out.println("    A B C D E F G H");
@@ -106,9 +109,9 @@ public class MoveHorse {
         System.out.println("    A B C D E F G H");
     }
 
-    private static void preview() {
+    private void preview() {
         System.out.println("This application is chess horse simulator!!!\n" +
-                "Coordinates must be entered in the form - H2, a5\n" +
+                "Coordinates must be entered in the form - H2, a5\n\n" +
                 "Empty position - ·\n" +
                 "Chess piece position - X\n");
         System.out.println("if you want return to main menu, entered - 0");

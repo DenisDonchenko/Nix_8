@@ -1,7 +1,9 @@
 package ua.com.alevel;
 
+import ua.com.alevel.area.triangle.AreaTriangle;
 import ua.com.alevel.move.horse.MoveHorse;
 import ua.com.alevel.unique.symbol.UniqueNumber;
+import ua.com.alevel.valide.brackets.Brackets;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,18 +20,22 @@ public class ProgramRun {
             while ((event = reader.readLine()) != null) {
                 switch (event) {
                     case "1": {
-                        UniqueNumber.start(reader);
+                      new UniqueNumber(reader).run();
                         isExit("1");
                     }
                     break;
                     case "2": {
-                        MoveHorse.run(reader);
+                       new MoveHorse(reader).run();
                         isExit("2");
                     }
                     break;
                     case "3": {
-
+                       new AreaTriangle(reader).start();
                         isExit("3");
+                    }
+                    case "4": {
+                        new Brackets(reader).start();
+                        isExit("4");
                     }
                     break;
                     case "0": {
@@ -47,8 +53,10 @@ public class ProgramRun {
     }
 
     private static void preview() {
-        System.out.println("\nif you want get the number of unique characters, select - 1");
+        System.out.println("\nIf you want run application \"Unique numbers\", select - 1");
         System.out.println("If you want run application \"Horse movement\", select - 2");
+        System.out.println("If you want run application \"Area triangle\", select - 3");
+        System.out.println("If you want run application \"Bracket valid\", select - 4");
         System.out.println("if you want exit, select - 0");
         System.out.println("Make your choice:");
     }
