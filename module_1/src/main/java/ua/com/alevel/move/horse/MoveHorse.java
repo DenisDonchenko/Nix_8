@@ -3,7 +3,6 @@ package ua.com.alevel.move.horse;
 import ua.com.alevel.move.horse.util.ValideCoordinates;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -43,7 +42,7 @@ public class MoveHorse {
         this.reader = reader;
     }
 
-    public void run() {
+    public void start() {
         preview();
         printBoard();
         while (true) {

@@ -2,6 +2,7 @@ package ua.com.alevel;
 
 import ua.com.alevel.area.triangle.AreaTriangle;
 import ua.com.alevel.move.horse.MoveHorse;
+import ua.com.alevel.tree.node.Tree;
 import ua.com.alevel.unique.symbol.UniqueNumber;
 import ua.com.alevel.valide.brackets.Brackets;
 
@@ -20,12 +21,12 @@ public class ProgramRun {
             while ((event = reader.readLine()) != null) {
                 switch (event) {
                     case "1": {
-                      new UniqueNumber(reader).run();
+                      new UniqueNumber(reader).start();
                         isExit("1");
                     }
                     break;
                     case "2": {
-                       new MoveHorse(reader).run();
+                       new MoveHorse(reader).start();
                         isExit("2");
                     }
                     break;
@@ -36,6 +37,10 @@ public class ProgramRun {
                     case "4": {
                         new Brackets(reader).start();
                         isExit("4");
+                    }
+                    case "5": {
+                      new Tree(reader).start();
+                        isExit("5");
                     }
                     break;
                     case "0": {
@@ -57,6 +62,7 @@ public class ProgramRun {
         System.out.println("If you want run application \"Horse movement\", select - 2");
         System.out.println("If you want run application \"Area triangle\", select - 3");
         System.out.println("If you want run application \"Bracket valid\", select - 4");
+        System.out.println("If you want run application \"Maximum tree depth\", select - 5");
         System.out.println("if you want exit, select - 0");
         System.out.println("Make your choice:");
     }

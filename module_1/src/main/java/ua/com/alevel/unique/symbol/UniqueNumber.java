@@ -1,20 +1,22 @@
 package ua.com.alevel.unique.symbol;
 
+
+import ua.com.alevel.unique.symbol.util.ValideInputString;
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.*;
 
 public class UniqueNumber {
     private List<String> arrayNumber = new ArrayList<>();
     private BufferedReader reader;
-
+    private String inputArrayNumber = "";
     public UniqueNumber(BufferedReader reader) {
         this.reader = reader;
     }
 
-    public void run() {
+    public void start() {
         preview();
-        readArray();
+        readString();
         printArray();
         System.out.println("\nCount unique number - " + uniqueCount());
         arrayNumber.removeAll(arrayNumber);
@@ -32,26 +34,21 @@ public class UniqueNumber {
         System.out.print("Array of numbers - " + arrayNumber);
     }
 
-    private void readArray() {
+    private void readString() {
         System.out.println("Enter numbers separated by a space (Example - 1 2 3 4 5)");
-        String inputArrayNumber = "";
+
 
         try {
             inputArrayNumber = reader.readLine().trim();
-            if (inputArrayNumber.isEmpty()) {
-                System.out.println("Error!!! Input empty \n");
-                readArray();
+            if (!ValideInputString.valideString(inputArrayNumber)) {
+                throw new Exception();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            readString();
         }
-        if (isNumbers(inputArrayNumber)) {
-            arrayNumber = new ArrayList<>(Arrays.asList(inputArrayNumber.split(" ")));
+        arrayNumber = new ArrayList<>(Arrays.asList(inputArrayNumber.split(" ")));
 
-        } else {
-            System.out.println("\nOnly numbers and spaces are allowed!!!\n");
-            readArray();
-        }
+
     }
 
     private void preview() {
@@ -59,7 +56,4 @@ public class UniqueNumber {
         System.out.println("if you want exit, select - 0");
     }
 
-    private boolean isNumbers(String arrayNumber) {
-        return arrayNumber.matches("[0-9.\\s+]+");
-    }
 }
