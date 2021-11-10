@@ -6,7 +6,7 @@ public class UserDB {
     private final User[] users;
     private static UserDB instance;
     private static Long user_id = 1L;
-    public static int realSizeArray = 0;
+    public  static int realSizeArray = 0;
     private static int capasity = 10;
     private static int indexNewUser = 0;
 
