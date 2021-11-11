@@ -6,15 +6,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public final class Valide {
+public final class ValidFilm {
     private static final String REGEX_NAME = "^[a-zA-Z0-9]{1,100}$";
     private static final String REGEX_YEARS = "[0-9]{4}";
     private static ResourceBundle settings = ResourceBundle.getBundle("message", Locale.ENGLISH);
 
-    private Valide() {
+    private ValidFilm() {
     }
 
-    public static void valideName(String name) {
+    public static void validName(String name) {
         if (name.isEmpty()) {
             throw new InvalidFilmException(settings.getString("film.name.empty"));
         }
@@ -26,7 +26,7 @@ public final class Valide {
         }
     }
 
-    public static void valideYear(String year) {
+    public static void validYear(String year) {
         if (year.isEmpty()) {
             throw new InvalidFilmException(settings.getString("film.year.empty"));
         }

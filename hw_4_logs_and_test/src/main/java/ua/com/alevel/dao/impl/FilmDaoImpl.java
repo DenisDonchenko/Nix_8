@@ -4,11 +4,12 @@ import ua.com.alevel.dao.FilmDao;
 import ua.com.alevel.db.impl.FilmDBImpl;
 import ua.com.alevel.entity.Film;
 
-public class FilmDaoImpl  implements FilmDao {
+public class FilmDaoImpl implements FilmDao {
     @Override
     public void create(Film entity) {
         FilmDBImpl.getInstance().create(entity);
     }
+
     @Override
     public void update(Film entity) {
         FilmDBImpl.getInstance().update(entity);
@@ -31,6 +32,6 @@ public class FilmDaoImpl  implements FilmDao {
 
     @Override
     public int count() {
-        return 0;
+        return FilmDBImpl.getInstance().count();
     }
 }

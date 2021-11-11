@@ -2,10 +2,7 @@ package ua.com.alevel.db.impl;
 
 import ua.com.alevel.db.FilmDB;
 import ua.com.alevel.entity.Film;
-import ua.com.alevel.entity.Hall;
 import ua.com.alevel.util.DBHelper;
-
-import java.util.Arrays;
 
 public class FilmDBImpl implements FilmDB {
 
@@ -71,9 +68,13 @@ public class FilmDBImpl implements FilmDB {
             if (films[i] != null) {
                 allFilms[i] = films[i];
             }
-
         }
         return allFilms;
+    }
+
+    @Override
+    public int count() {
+        return realSizeArray;
     }
 
     private int findIndexById(Long id) {

@@ -9,5 +9,6 @@ public interface BaseDB<ENTITY extends BaseEntity> {
     void delete(Long id);
     ENTITY findById(Long id);
     ENTITY[] findAll();
+    int count();
 
 }

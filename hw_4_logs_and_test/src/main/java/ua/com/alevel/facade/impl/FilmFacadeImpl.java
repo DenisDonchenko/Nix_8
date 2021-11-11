@@ -2,11 +2,8 @@ package ua.com.alevel.facade.impl;
 
 import ua.com.alevel.dto.film.CreateFilmDto;
 import ua.com.alevel.dto.film.UpdateFilmDto;
-import ua.com.alevel.dto.sessions.SessionDto;
 import ua.com.alevel.entity.Film;
-import ua.com.alevel.entity.Session;
 import ua.com.alevel.facade.FilmFacade;
-import ua.com.alevel.facade.SessionFacade;
 import ua.com.alevel.service.FilmService;
 import ua.com.alevel.service.impl.FilmServiceImpl;
 
@@ -51,7 +48,6 @@ public class FilmFacadeImpl implements FilmFacade {
     }
 
     private Film updateFilm(UpdateFilmDto updateFilmDto) {
-
         Film filmFromDB = filmService.findById(updateFilmDto.getId());
 
         filmFromDB.setNameFilm(updateFilmDto.getNameFilm());
@@ -59,5 +55,4 @@ public class FilmFacadeImpl implements FilmFacade {
         filmFromDB.setGenre(updateFilmDto.getGenre());
         return filmFromDB;
     }
-
 }
