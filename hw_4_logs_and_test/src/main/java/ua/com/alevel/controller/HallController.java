@@ -92,7 +92,6 @@ public class HallController {
 
             hallFacade.update(new HallUpdateDto(id, nameHall, capacity));
         } catch (IOException e) {
-            System.out.println("Exception input !!!");
             update(reader);
         }
     }
@@ -123,8 +122,9 @@ public class HallController {
     }
 
     private Long readId(BufferedReader reader) throws IOException {
-        System.out.println("Please, enter id");
+        System.out.println("Please, enter id hall");
         String id = reader.readLine();
+
         if (!ValidFilm.validIdEntity(id)) {
             throw new IOException();
         }
@@ -134,15 +134,17 @@ public class HallController {
     private String readHallName(BufferedReader reader) throws IOException {
         System.out.println("Please, enter name hall");
         String nameHall = reader.readLine();
-        if (!ValidHall.validName(nameHall,"hall.name.empty")) {
+
+        if (!ValidHall.validName(nameHall, "hall.name.empty")) {
             throw new IOException();
         }
         return nameHall;
     }
 
     private int readCapacityHall(BufferedReader reader) throws IOException {
-        System.out.println("Please, enter capacity hall");
+        System.out.println("Please, enter the capacity of the hall");
         String capacityHall = reader.readLine();
+
         if (!ValidHall.validCapacity(capacityHall)) {
             throw new IOException();
         }

@@ -9,8 +9,10 @@ public class HallCreateDto {
         this.nameHall = nameHall;
         this.capacity = capacity;
     }
+
     public HallCreateDto() {
-     }
+    }
+
     public String getNameHall() {
         return nameHall;
     }
@@ -25,13 +27,5 @@ public class HallCreateDto {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
-    }
-
-    @Override
-    public String toString() {
-        return "HallCreateDto{" +
-                "nameHall='" + nameHall + '\'' +
-                ", capacity=" + capacity +
-                '}';
     }
 }

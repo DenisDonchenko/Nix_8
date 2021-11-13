@@ -19,12 +19,8 @@ public class HallDBImpl implements HallDB {
 
     private HallDBImpl() {
         halls = new Hall[capacity];
-
-        create(new Hall("Green",29));
-        create(new Hall("Red",35));
-        create(new Hall("Black",25));
-
     }
+
     public static HallDBImpl getInstance() {
         if (instance == null) {
             instance = new HallDBImpl();

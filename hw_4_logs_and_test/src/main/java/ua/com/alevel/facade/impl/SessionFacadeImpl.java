@@ -18,9 +18,9 @@ import java.time.LocalTime;
 
 public class SessionFacadeImpl implements SessionFacade {
 
-    private static FilmService filmService = new FilmServiceImpl();
-    private static HallService hallService = new HallServiceImpl();
-    private static SessionService sessionService = new SessionServiceImpl();
+    private static final FilmService filmService = new FilmServiceImpl();
+    private static final HallService hallService = new HallServiceImpl();
+    private static final SessionService sessionService = new SessionServiceImpl();
 
     @Override
     public void create(SessionCreateDto sessionCreateDto) {

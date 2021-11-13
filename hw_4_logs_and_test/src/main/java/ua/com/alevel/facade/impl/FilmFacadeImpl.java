@@ -10,7 +10,7 @@ import ua.com.alevel.service.impl.FilmServiceImpl;
 import java.time.LocalTime;
 
 public class FilmFacadeImpl implements FilmFacade {
-    private static FilmService filmService = new FilmServiceImpl();
+    private static final FilmService filmService = new FilmServiceImpl();
 
     @Override
     public void create(CreateFilmDto entity) {

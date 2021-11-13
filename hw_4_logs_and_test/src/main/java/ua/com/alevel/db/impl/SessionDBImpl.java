@@ -1,9 +1,10 @@
 package ua.com.alevel.db.impl;
 
 import ua.com.alevel.db.SessionDB;
-import ua.com.alevel.entity.Hall;
 import ua.com.alevel.entity.Session;
 import ua.com.alevel.util.DBHelper;
+
+import java.util.Objects;
 
 public class SessionDBImpl implements SessionDB {
 
@@ -53,9 +54,9 @@ public class SessionDBImpl implements SessionDB {
 
     @Override
     public Session findById(Long id) {
-        for (int i = 0; i < sessions.length; i++) {
-            if (sessions[i].getId() == id) {
-                return sessions[i];
+        for (Session session : sessions) {
+            if (Objects.equals(session.getId(), id)) {
+                return session;
             }
         }
         throw new RuntimeException("Session with id - " + id + " not found");
@@ -80,7 +81,7 @@ public class SessionDBImpl implements SessionDB {
     private int findIndexById(Long id) {
 
         for (int i = 0; i < sessions.length; i++) {
-            if (sessions[i].getId() == id) {
+            if (Objects.equals(sessions[i].getId(), id)) {
                 return i;
             }
         }

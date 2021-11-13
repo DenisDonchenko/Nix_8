@@ -13,7 +13,7 @@ public class SessionCreateDto {
 
     public SessionCreateDto(Long idFilm, Long idHall, LocalDate dateSession,
                             LocalTime timeStart
-                            ) {
+    ) {
         this.idFilm = idFilm;
         this.idHall = idHall;
         this.dateSession = dateSession;
@@ -52,4 +52,4 @@ public class SessionCreateDto {
         this.timeStart = timeStart;
     }
 
-   }
+}

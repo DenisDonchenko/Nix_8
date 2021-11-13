@@ -13,13 +13,6 @@ public class SessionFindDto {
     private LocalTime timeFinish;
     private String nameHall;
 
-    public SessionFindDto(String nameFilm, LocalDate dateSession, LocalTime timeStart, LocalTime timeFinish, String nameHall) {
-        this.nameFilm = nameFilm;
-        this.dateSession = dateSession;
-        this.timeStart = timeStart;
-        this.timeFinish = timeFinish;
-        this.nameHall = nameHall;
-    }
 
     public SessionFindDto() {
     }

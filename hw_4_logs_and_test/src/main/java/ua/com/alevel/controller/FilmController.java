@@ -76,9 +76,9 @@ public class FilmController {
         try {
             String nameFilm = readNameFilm(reader);
             String yearIssue = readYearIssue(reader);
-            String filmDuration = readFilmDuration(reader);
+            LocalTime filmDuration = readFilmDuration(reader);
 
-            filmFacade.create(new CreateFilmDto(nameFilm, yearIssue, LocalTime.parse(filmDuration)));
+            filmFacade.create(new CreateFilmDto(nameFilm, yearIssue, filmDuration));
         } catch (IOException | DateTimeParseException e) {
             create(reader);
         }
@@ -90,9 +90,9 @@ public class FilmController {
             Long id = readIdFilm(reader);
             String nameFilm = readNameFilm(reader);
             String yearIssue = readYearIssue(reader);
-            String filmDuration = readFilmDuration(reader);
+            LocalTime filmDuration = readFilmDuration(reader);
 
-            filmFacade.update(new UpdateFilmDto(id, nameFilm, yearIssue, LocalTime.parse(filmDuration)));
+            filmFacade.update(new UpdateFilmDto(id, nameFilm, yearIssue, filmDuration));
         } catch (IOException e) {
             update(reader);
         }
@@ -118,23 +118,23 @@ public class FilmController {
 
     private void findAll() {
         Film[] films = filmFacade.findAll();
-        for (Film film : films) {
+        for (Film film : filmFacade.findAll()) {
             System.out.println(film.toString());
         }
     }
 
-    private String readFilmDuration(BufferedReader reader) throws IOException {
-        System.out.println("Please, enter film duration");
+    private LocalTime readFilmDuration(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter film duration (format input -  HH:mm)");
         String filmDuration = reader.readLine();
-        if (!ValidFilm.validTime(filmDuration,"film.duration.empty","film.duration.format")) {
+
+        if (!ValidFilm.validTime(filmDuration, "film.duration.empty", "film.duration.format")) {
             throw new IOException();
         }
-        LocalTime.parse(filmDuration);
-        return filmDuration;
+        return LocalTime.parse(filmDuration);
     }
 
     private String readYearIssue(BufferedReader reader) throws IOException {
-        System.out.println("Please, enter film release year");
+        System.out.println("Please, enter film release year (format input -  yyyy)");
         String yearIssue = reader.readLine();
 
         if (!ValidFilm.validYear(yearIssue)) {
@@ -147,8 +147,7 @@ public class FilmController {
         System.out.println("Please, enter name film");
         String nameFilm = reader.readLine();
 
-        if (!ValidFilm.validName(nameFilm,"film.name.empty")) {
-
+        if (!ValidFilm.validName(nameFilm, "film.name.empty")) {
             throw new IOException();
         }
         return nameFilm;
@@ -157,6 +156,7 @@ public class FilmController {
     private Long readIdFilm(BufferedReader reader) throws IOException {
         System.out.println("Please, enter id");
         String id = reader.readLine();
+
         if (!ValidFilm.validIdEntity(id)) {
             throw new IOException();
         }

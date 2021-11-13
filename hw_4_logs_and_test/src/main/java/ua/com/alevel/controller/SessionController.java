@@ -76,9 +76,9 @@ public class SessionController {
 
     private void create(BufferedReader reader) {
         try {
-            System.out.println("Enter id film");
+            System.out.println("Please, enter id film");
             Long idFilm = readId(reader);
-            System.out.println("Enter id hall");
+            System.out.println("Please, enter id hall");
             Long idHall = readId(reader);
 
             LocalDate dateSession = readDateSession(reader);
@@ -93,12 +93,12 @@ public class SessionController {
 
     private void update(BufferedReader reader) {
         try {
-            System.out.println("Enter id session");
+            System.out.println("Please, enter id session");
             Long idSession = readId(reader);
 
-            System.out.println("Enter id film");
+            System.out.println("Please, enter id film");
             Long idFilm = readId(reader);
-            System.out.println("Enter id hall");
+            System.out.println("Please, enter id hall");
             Long idHall = readId(reader);
 
             LocalDate dateSession = readDateSession(reader);
@@ -112,7 +112,7 @@ public class SessionController {
 
     private void delete(BufferedReader reader) {
         try {
-            System.out.println("Enter id session");
+            System.out.println("Please, enter id session");
             Long idSession = readId(reader);
             sessionFacade.delete(idSession);
         } catch (IOException e) {
@@ -122,7 +122,7 @@ public class SessionController {
 
     private void findById(BufferedReader reader) {
         try {
-            System.out.println("Enter id session");
+            System.out.println("Please, enter id session");
             Long idSession = readId(reader);
             System.out.println(sessionFacade.findById(idSession).toString());
         } catch (IOException e) {
@@ -132,7 +132,6 @@ public class SessionController {
 
     private void findAll() {
         SessionFindDto[] dtos = sessionFacade.findAll();
-
         for (SessionFindDto dto : dtos) {
             System.out.println(dto.toString());
         }
@@ -140,7 +139,7 @@ public class SessionController {
     }
 
     private LocalDate readDateSession(BufferedReader reader) throws IOException {
-        System.out.println("Please, date session");
+        System.out.println("Please, enter date session (format input -  dd.MM.yyyy)");
         String dateSession = reader.readLine();
         if (!ValidSession.validDate(dateSession)) {
             throw new IOException();
@@ -150,18 +149,18 @@ public class SessionController {
     }
 
     private LocalTime readStartTimeSession(BufferedReader reader) throws IOException {
-        System.out.println("Enter time start session");
+        System.out.println("Please, enter time start session  (format input -  HH:mm)");//
         String timeStart = reader.readLine();
+
         if (!ValidSession.validTime(timeStart, "session.time.empty", "session.time.format")) {
             throw new IOException();
         }
-
         return LocalTime.parse(timeStart);
     }
 
     private Long readId(BufferedReader reader) throws IOException {
-        /*System.out.println("Please, enter id session");*/
         String id = reader.readLine();
+
         if (!ValidSession.validIdEntity(id)) {
             throw new IOException();
         }
