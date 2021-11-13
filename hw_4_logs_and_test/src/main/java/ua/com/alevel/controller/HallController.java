@@ -4,9 +4,9 @@ import ua.com.alevel.ProgrumRun;
 import ua.com.alevel.dto.hall.HallCreateDto;
 import ua.com.alevel.dto.hall.HallUpdateDto;
 import ua.com.alevel.entity.Hall;
-import ua.com.alevel.exception.film.InvalidFilmException;
 import ua.com.alevel.facade.HallFacade;
 import ua.com.alevel.facade.impl.HallFacadeImpl;
+import ua.com.alevel.util.valide.ValidFilm;
 import ua.com.alevel.util.valide.ValidHall;
 
 import java.io.BufferedReader;
@@ -37,106 +37,115 @@ public class HallController {
 
     private void runNavigation() {
         System.out.println();
-        System.out.println("------------------------------HALL--------------------------------------");
+        System.out.println("---------------------------HALL------------------------------------");
         System.out.println("Create hall, please enter 1;      Update hall, please enter 2");
         System.out.println("Delete hall, please enter 3;      Find hall by id, please enter 4");
-        System.out.println("Find all halls, please enter 5;   Exit to main menu, please enter 0");
+        System.out.println("Find all halls, please enter 5;   Exit to main menu, please enter 6");
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
     }
 
     private void crud(String position, BufferedReader reader) {
         switch (position) {
-            case "1":
-                System.out.println("                      Create film                               ");
+            case "1" -> {
+                System.out.println("                      Create hall                               ");
                 create(reader);
-                break;
-            case "2":
-                System.out.println("                      Update film                               ");
+            }
+            case "2" -> {
+                System.out.println("                      Update hall                               ");
                 update(reader);
-                break;
-            case "3":
-                System.out.println("                      Delete film                               ");
+            }
+            case "3" -> {
+                System.out.println("                      Delete hall                               ");
                 delete(reader);
-                break;
-            case "4":
+            }
+            case "4" -> {
                 System.out.println("                      Find by id hall                               ");
                 findById(reader);
-                break;
-            case "5":
+            }
+            case "5" -> {
                 System.out.println("                      Find all halls                               ");
-                findAll(reader);
-                break;
-            case "0":
-                ProgrumRun.run();
-                break;
+                findAll();
+            }
+            case "6" -> ProgrumRun.run(reader);
         }
         runNavigation();
     }
 
     private void create(BufferedReader reader) {
-
         try {
-            System.out.println("Please, enter name hall ");
-            String nameHall = reader.readLine();
-            ValidHall.validName(nameHall);
-            System.out.println("Please, hall capacity ");
-            int capacity = Integer.parseInt(reader.readLine());
-            ValidHall.validCapacity(String.valueOf(capacity));
+            String nameHall = readHallName(reader);
+            int capacity = readCapacityHall(reader);
 
             hallFacade.create(new HallCreateDto(nameHall, capacity));
-        } catch (IOException | InvalidFilmException exception) {
-            System.out.println(exception.getMessage());
+        } catch (IOException | DateTimeParseException e) {
             create(reader);
         }
     }
 
-    private void update(BufferedReader reader) {
 
+    private void update(BufferedReader reader) {
         try {
-            System.out.println("Please, enter id");
-            Long id = Long.valueOf(reader.readLine());
-            System.out.println("Please, enter name hall ");
-            String nameHall = reader.readLine();
-            ValidHall.validName(nameHall);
-            System.out.println("Please, hall capacity ");
-            int capacity = Integer.parseInt(reader.readLine());
-            ValidHall.validCapacity(String.valueOf(capacity));
+            Long id = readId(reader);
+            String nameHall = readHallName(reader);
+            int capacity = readCapacityHall(reader);
 
             hallFacade.update(new HallUpdateDto(id, nameHall, capacity));
-        } catch (IOException | DateTimeParseException e) {
+        } catch (IOException e) {
             System.out.println("Exception input !!!");
             update(reader);
         }
     }
 
     private void delete(BufferedReader reader) {
-
         try {
-            System.out.println("Please, enter id hall");
-            Long id = Long.valueOf(reader.readLine());
+            Long id = readId(reader);
             hallFacade.delete(id);
         } catch (IOException e) {
-            System.out.println("problem: = " + e.getMessage());
+            delete(reader);
         }
     }
 
     private void findById(BufferedReader reader) {
-
         try {
-            System.out.println("Please, enter id hall");
-            Long id = Long.valueOf(reader.readLine());
-            Hall hall = hallFacade.findById(id);
-            System.out.println(hall.toString());
+            Long id = readId(reader);
+            System.out.println(hallFacade.findById(id).toString());
         } catch (IOException e) {
-            System.out.println("problem: = " + e.getMessage());
+            findById(reader);
         }
     }
 
-    private void findAll(BufferedReader reader) {
+    private void findAll() {
         Hall[] halls = hallFacade.findAll();
         for (Hall hall : halls) {
             System.out.println(hall.toString());
         }
+    }
+
+    private Long readId(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter id");
+        String id = reader.readLine();
+        if (!ValidFilm.validIdEntity(id)) {
+            throw new IOException();
+        }
+        return Long.parseLong(id);
+    }
+
+    private String readHallName(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter name hall");
+        String nameHall = reader.readLine();
+        if (!ValidHall.validName(nameHall,"hall.name.empty")) {
+            throw new IOException();
+        }
+        return nameHall;
+    }
+
+    private int readCapacityHall(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter capacity hall");
+        String capacityHall = reader.readLine();
+        if (!ValidHall.validCapacity(capacityHall)) {
+            throw new IOException();
+        }
+        return Integer.parseInt(capacityHall);
     }
 }

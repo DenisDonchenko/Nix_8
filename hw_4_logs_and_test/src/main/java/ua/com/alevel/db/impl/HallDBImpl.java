@@ -4,7 +4,7 @@ import ua.com.alevel.db.HallDB;
 import ua.com.alevel.entity.Hall;
 import ua.com.alevel.util.DBHelper;
 
-import java.util.Arrays;
+import java.util.Objects;
 
 public class HallDBImpl implements HallDB {
 
@@ -19,6 +19,10 @@ public class HallDBImpl implements HallDB {
 
     private HallDBImpl() {
         halls = new Hall[capacity];
+
+        create(new Hall("Green",29));
+        create(new Hall("Red",35));
+        create(new Hall("Black",25));
 
     }
     public static HallDBImpl getInstance() {
@@ -54,9 +58,9 @@ public class HallDBImpl implements HallDB {
 
     @Override
     public Hall findById(Long id) {
-        for (int i = 0; i < halls.length; i++) {
-            if (halls[i].getId() == id) {
-                return halls[i];
+        for (Hall hall : halls) {
+            if (Objects.equals(hall.getId(), id)) {
+                return hall;
             }
         }
         throw new RuntimeException("Hall with id - " + id + " not found");
@@ -82,7 +86,7 @@ public class HallDBImpl implements HallDB {
     private int findIndexById(Long id) {
 
         for (int i = 0; i < halls.length; i++) {
-            if (halls[i].getId() == id) {
+            if (Objects.equals(halls[i].getId(), id)) {
                 return i;
             }
         }

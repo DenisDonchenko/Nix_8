@@ -2,7 +2,7 @@ package ua.com.alevel.util;
 
 import java.util.Arrays;
 
-public final class DBHelper<ARRAY> {
+public final class DBHelper{
     private DBHelper() {}
 
     public static <ARRAY> ARRAY[] newCapacity(int capacity, ARRAY[] array) {

@@ -1,17 +1,18 @@
 package ua.com.alevel.entity;
 
+import ua.com.alevel.util.ConstGlobal;
+
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Film extends BaseEntity {
     private String nameFilm;
     private String yearIssue;
-    private LocalTime genre;
+    private LocalTime filmDuration;
 
-    public Film(String nameFilm, String yearIssue, LocalTime genre) {
+    public Film(String nameFilm, String yearIssue, LocalTime filmDuration) {
         this.nameFilm = nameFilm;
         this.yearIssue = yearIssue;
-        this.genre = genre;
+        this.filmDuration = filmDuration;
     }
 
     public String getNameFilm() {
@@ -22,29 +23,25 @@ public class Film extends BaseEntity {
         this.nameFilm = nameFilm;
     }
 
-    public String getYearIssue() {
-        return yearIssue;
-    }
-
     public void setYearIssue(String yearIssue) {
         this.yearIssue = yearIssue;
     }
 
-    public LocalTime getGenre() {
-        return genre;
+    public LocalTime getFilmDuration() {
+        return filmDuration;
     }
 
-    public void setGenre(LocalTime genre) {
-        this.genre = genre;
+    public void setFilmDuration(LocalTime filmDuration) {
+        this.filmDuration = filmDuration;
     }
 
     @Override
     public String toString() {
-        return "Film{" +
-                " id='" + super.getId() + '\'' +
-                ", nameFilm='" + nameFilm + '\'' +
-                ", yearIssue=" + yearIssue +
-                ", genre='" + genre.format(DateTimeFormatter.ofPattern("H:mm")) + '\'' +
-                '}';
+        return "\"Film\" : {" +
+                "\n   \"id\": " + super.getId()  +
+                "\n   \"nameFilm\": " + nameFilm  +
+                "\n   \"yearIssue\": " + yearIssue +
+                "\n   \"filmDuration\": " + filmDuration.format(ConstGlobal.TIME_FORMATTER)  +
+                "\n}";
     }
 }

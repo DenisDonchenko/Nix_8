@@ -42,11 +42,4 @@ public class UserController {
             System.out.println("users empty");
         }
     }
-
-    private LocalDate addDate(String date) {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return LocalDate.parse(date, formatter1);
-    }
-
-
 }

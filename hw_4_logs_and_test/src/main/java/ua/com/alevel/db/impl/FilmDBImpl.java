@@ -2,7 +2,11 @@ package ua.com.alevel.db.impl;
 
 import ua.com.alevel.db.FilmDB;
 import ua.com.alevel.entity.Film;
+import ua.com.alevel.util.ConstGlobal;
 import ua.com.alevel.util.DBHelper;
+
+import java.time.LocalTime;
+import java.util.Objects;
 
 public class FilmDBImpl implements FilmDB {
 
@@ -17,6 +21,10 @@ public class FilmDBImpl implements FilmDB {
 
     private FilmDBImpl() {
         films = new Film[capacity];
+
+        create(new Film("Film1","2021", LocalTime.parse("01:12", ConstGlobal.TIME_FORMATTER)));
+        create(new Film("Film2","2021", LocalTime.parse("02:15", ConstGlobal.TIME_FORMATTER)));
+        create(new Film("Film3","2020", LocalTime.parse("01:55", ConstGlobal.TIME_FORMATTER)));
     }
 
     public static FilmDBImpl getInstance() {
@@ -53,9 +61,9 @@ public class FilmDBImpl implements FilmDB {
 
     @Override
     public Film findById(Long id) {
-        for (int i = 0; i < films.length; i++) {
-            if (films[i].getId() == id) {
-                return films[i];
+        for (Film film : films) {
+            if (Objects.equals(film.getId(), id)) {
+                return film;
             }
         }
         throw new RuntimeException("Film with id - " + id + " not found");
@@ -80,7 +88,7 @@ public class FilmDBImpl implements FilmDB {
     private int findIndexById(Long id) {
 
         for (int i = 0; i < films.length; i++) {
-            if (films[i].getId() == id) {
+            if (Objects.equals(films[i].getId(), id)) {
                 return i;
             }
         }

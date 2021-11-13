@@ -2,12 +2,13 @@ package ua.com.alevel.dao.impl;
 
 import ua.com.alevel.dao.HallDao;
 import ua.com.alevel.db.impl.HallDBImpl;
-import ua.com.alevel.db.impl.SessionDBImpl;
 import ua.com.alevel.entity.Hall;
 
 public class HallDaoImpl implements HallDao {
     @Override
-    public void create(Hall hall) { HallDBImpl.getInstance().create(hall); }
+    public void create(Hall hall) {
+        HallDBImpl.getInstance().create(hall);
+    }
 
     @Override
     public void update(Hall hall) {

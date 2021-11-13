@@ -7,13 +7,13 @@ public class UpdateFilmDto {
     private Long id;
     private String nameFilm;
     private String yearIssue;
-    private LocalTime genre;
+    private LocalTime filmDuration;
 
-    public UpdateFilmDto(Long id, String nameFilm, String yearIssue, LocalTime genre) {
+    public UpdateFilmDto(Long id, String nameFilm, String yearIssue, LocalTime filmDuration) {
         this.id = id;
         this.nameFilm = nameFilm;
         this.yearIssue = yearIssue;
-        this.genre = genre;
+        this.filmDuration = filmDuration;
     }
 
     public Long getId() {
@@ -40,11 +40,11 @@ public class UpdateFilmDto {
         this.yearIssue = yearIssue;
     }
 
-    public LocalTime getGenre() {
-        return genre;
+    public LocalTime getFilmDuration() {
+        return filmDuration;
     }
 
-    public void setGenre(LocalTime genre) {
-        this.genre = genre;
+    public void setFilmDuration(LocalTime genre) {
+        this.filmDuration = filmDuration;
     }
 }

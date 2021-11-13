@@ -42,9 +42,9 @@ public class FilmFacadeImpl implements FilmFacade {
     private Film createFilm(CreateFilmDto createFilmDto) {
         String nameFilm = createFilmDto.getNameFilm();
         String yearIssue = createFilmDto.getYearIssue();
-        LocalTime genre = createFilmDto.getGenre();
+        LocalTime filmDuration = createFilmDto.getFilmDuration();
 
-        return new Film(nameFilm, yearIssue, genre);
+        return new Film(nameFilm, yearIssue, filmDuration);
     }
 
     private Film updateFilm(UpdateFilmDto updateFilmDto) {
@@ -52,7 +52,7 @@ public class FilmFacadeImpl implements FilmFacade {
 
         filmFromDB.setNameFilm(updateFilmDto.getNameFilm());
         filmFromDB.setYearIssue(updateFilmDto.getYearIssue());
-        filmFromDB.setGenre(updateFilmDto.getGenre());
+        filmFromDB.setFilmDuration(updateFilmDto.getFilmDuration());
         return filmFromDB;
     }
 }

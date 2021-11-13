@@ -4,7 +4,6 @@ import ua.com.alevel.ProgrumRun;
 import ua.com.alevel.dto.film.CreateFilmDto;
 import ua.com.alevel.dto.film.UpdateFilmDto;
 import ua.com.alevel.entity.Film;
-import ua.com.alevel.exception.film.InvalidFilmException;
 import ua.com.alevel.facade.FilmFacade;
 import ua.com.alevel.facade.impl.FilmFacadeImpl;
 import ua.com.alevel.util.valide.ValidFilm;
@@ -41,109 +40,127 @@ public class FilmController {
         System.out.println("---------------------------FILM------------------------------------");
         System.out.println("Create film, please enter 1;      Update film, please enter 2");
         System.out.println("Delete film, please enter 3;      Find film by id, please enter 4");
-        System.out.println("Find all films, please enter 5;   Exit to main menu, please enter 0");
+        System.out.println("Find all films, please enter 5;   Exit to main menu, please enter 6");
         System.out.println("------------------------------------------------------------------------");
         System.out.println();
     }
 
     private void crud(String position, BufferedReader reader) {
         switch (position) {
-            case "1":
+            case "1" -> {
                 System.out.println("                      Create film                               ");
                 create(reader);
-                break;
-            case "2":
+            }
+            case "2" -> {
                 System.out.println("                      Update film                               ");
                 update(reader);
-                break;
-            case "3":
+            }
+            case "3" -> {
                 System.out.println("                      Delete film                               ");
                 delete(reader);
-                break;
-            case "4":
-                System.out.println("                      Find by id hall                               ");
+            }
+            case "4" -> {
+                System.out.println("                      Find by id film                               ");
                 findById(reader);
-                break;
-            case "5":
-                System.out.println("                      Find all halls                               ");
-                findAll(reader);
-                break;
-            case "0":
-                ProgrumRun.run();
-                break;
+            }
+            case "5" -> {
+                System.out.println("                      Find all films                               ");
+                findAll();
+            }
+            case "6" -> ProgrumRun.run(reader);
         }
         runNavigation();
     }
 
     private void create(BufferedReader reader) {
         try {
-            System.out.println("Please, enter name film");
-            String nameFilm = reader.readLine();
-            ValidFilm.validName(nameFilm);
-            System.out.println("Please, enter film release year");
-            String yearIssue = reader.readLine();
-            ValidFilm.validYear(yearIssue);
-            System.out.println("Please, enter film duration");
-            String genre = reader.readLine();
+            String nameFilm = readNameFilm(reader);
+            String yearIssue = readYearIssue(reader);
+            String filmDuration = readFilmDuration(reader);
 
-            filmFacade.create(new CreateFilmDto(nameFilm, yearIssue, LocalTime.parse(genre)));
+            filmFacade.create(new CreateFilmDto(nameFilm, yearIssue, LocalTime.parse(filmDuration)));
         } catch (IOException | DateTimeParseException e) {
-            System.out.println("Exception input !!!");
-            create(reader);
-        } catch (InvalidFilmException exception) {
-            System.out.println(exception.getMessage());
             create(reader);
         }
     }
 
+
     private void update(BufferedReader reader) {
         try {
-            System.out.println("Please, enter id");
-            Long id = Long.valueOf(reader.readLine());
-            System.out.println("Please, enter name film");
-            String nameFilm = reader.readLine();
-            ValidFilm.validName(nameFilm);
-            System.out.println("Please, enter film release year");
-            String yearIssue = reader.readLine();
-            ValidFilm.validYear(yearIssue);
-            System.out.println("Please, enter film duration");
-            String genre = reader.readLine();
+            Long id = readIdFilm(reader);
+            String nameFilm = readNameFilm(reader);
+            String yearIssue = readYearIssue(reader);
+            String filmDuration = readFilmDuration(reader);
 
-            filmFacade.update(new UpdateFilmDto(id, nameFilm, yearIssue, LocalTime.parse(genre)));
-        } catch (IOException | DateTimeParseException e) {
-            System.out.println("Exception input !!!");
-            update(reader);
-        } catch (InvalidFilmException exception) {
-            System.out.println(exception.getMessage());
+            filmFacade.update(new UpdateFilmDto(id, nameFilm, yearIssue, LocalTime.parse(filmDuration)));
+        } catch (IOException e) {
             update(reader);
         }
     }
 
     private void delete(BufferedReader reader) {
         try {
-            System.out.println("Please, enter id film");
-            Long id = Long.valueOf(reader.readLine());
+            Long id = readIdFilm(reader);
             filmFacade.delete(id);
         } catch (IOException e) {
-            System.out.println("problem: = " + e.getMessage());
+            delete(reader);
         }
     }
 
     private void findById(BufferedReader reader) {
         try {
-            System.out.println("Please, enter id film");
-            Long id = Long.valueOf(reader.readLine());
-            Film film = filmFacade.findById(id);
-            System.out.println(film.toString());
+            Long id = readIdFilm(reader);
+            System.out.println(filmFacade.findById(id).toString());
         } catch (IOException e) {
-            System.out.println("problem: = " + e.getMessage());
+            findById(reader);
         }
     }
 
-    private void findAll(BufferedReader reader) {
+    private void findAll() {
         Film[] films = filmFacade.findAll();
         for (Film film : films) {
             System.out.println(film.toString());
         }
     }
+
+    private String readFilmDuration(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter film duration");
+        String filmDuration = reader.readLine();
+        if (!ValidFilm.validTime(filmDuration,"film.duration.empty","film.duration.format")) {
+            throw new IOException();
+        }
+        LocalTime.parse(filmDuration);
+        return filmDuration;
+    }
+
+    private String readYearIssue(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter film release year");
+        String yearIssue = reader.readLine();
+
+        if (!ValidFilm.validYear(yearIssue)) {
+            throw new IOException();
+        }
+        return yearIssue;
+    }
+
+    private String readNameFilm(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter name film");
+        String nameFilm = reader.readLine();
+
+        if (!ValidFilm.validName(nameFilm,"film.name.empty")) {
+
+            throw new IOException();
+        }
+        return nameFilm;
+    }
+
+    private Long readIdFilm(BufferedReader reader) throws IOException {
+        System.out.println("Please, enter id");
+        String id = reader.readLine();
+        if (!ValidFilm.validIdEntity(id)) {
+            throw new IOException();
+        }
+        return Long.parseLong(id);
+    }
+
 }

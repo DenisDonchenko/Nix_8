@@ -6,12 +6,12 @@ public class CreateFilmDto {
 
     private String nameFilm;
     private String yearIssue;
-    private LocalTime genre;
+    private LocalTime filmDuration;
 
-    public CreateFilmDto( String nameFilm, String yearIssue, LocalTime genre) {
+    public CreateFilmDto( String nameFilm, String yearIssue, LocalTime filmDuration) {
         this.nameFilm = nameFilm;
         this.yearIssue = yearIssue;
-        this.genre = genre;
+        this.filmDuration = filmDuration;
     }
 
     public String getNameFilm() {
@@ -30,11 +30,11 @@ public class CreateFilmDto {
         this.yearIssue = yearIssue;
     }
 
-    public LocalTime getGenre() {
-        return genre;
+    public LocalTime getFilmDuration() {
+        return filmDuration;
     }
 
-    public void setGenre(LocalTime genre) {
-        this.genre = genre;
+    public void setFilmDuration(LocalTime filmDuration) {
+        this.filmDuration = filmDuration;
     }
 }
