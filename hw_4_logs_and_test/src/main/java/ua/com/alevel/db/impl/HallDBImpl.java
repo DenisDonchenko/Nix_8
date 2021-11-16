@@ -18,7 +18,6 @@ public class HallDBImpl implements HallDB {
 
     private HallDBImpl() {
         halls = new Hall[capacity];
-        create(new Hall("Vip", 23));
     }
 
     public static HallDBImpl getInstance() {

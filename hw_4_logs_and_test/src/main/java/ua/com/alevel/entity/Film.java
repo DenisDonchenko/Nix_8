@@ -7,6 +7,9 @@ public class Film extends BaseEntity {
     private String yearIssue;
     private LocalTime filmDuration;
 
+    public Film() {
+    }
+
     public Film(String nameFilm, String yearIssue, LocalTime filmDuration) {
         this.nameFilm = nameFilm;
         this.yearIssue = yearIssue;

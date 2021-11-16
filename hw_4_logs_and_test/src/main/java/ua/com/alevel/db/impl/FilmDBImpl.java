@@ -20,7 +20,6 @@ public class FilmDBImpl implements FilmDB {
 
     private FilmDBImpl() {
         films = new Film[capacity];
-        create(new Film("Film1", "2021", LocalTime.parse("02:12")));
     }
 
     public static FilmDBImpl getInstance() {

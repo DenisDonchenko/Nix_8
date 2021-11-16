@@ -13,6 +13,7 @@ public final class DBHelper {
         return array;
     }
 
+
     public static <ARRAY> ARRAY[] removeItems(ARRAY[] array, int... r) {
         int shift = 0;
         for (int i = 0; i < array.length; i++) {
