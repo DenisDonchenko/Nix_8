@@ -11,14 +11,12 @@ import ua.com.alevel.util.valide.ValidHall;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 public class HallController {
 
     private final HallFacade hallFacade = new HallFacadeImpl();
 
     public void run(BufferedReader reader) {
-        System.out.println("select your option");
         String position;
         try {
             runNavigation();
@@ -38,6 +36,7 @@ public class HallController {
     private void runNavigation() {
         System.out.println();
         System.out.println("---------------------------HALL------------------------------------");
+        System.out.println("                     Select your option                             ");
         System.out.println("Create hall, please enter 1;      Update hall, please enter 2");
         System.out.println("Delete hall, please enter 3;      Find hall by id, please enter 4");
         System.out.println("Find all halls, please enter 5;   Exit to main menu, please enter 6");
@@ -46,6 +45,7 @@ public class HallController {
     }
 
     private void crud(String position, BufferedReader reader) {
+
         switch (position) {
             case "1" -> {
                 System.out.println("                      Create hall                               ");
@@ -65,7 +65,7 @@ public class HallController {
             }
             case "5" -> {
                 System.out.println("                      Find all halls                               ");
-                findAll();
+                findAll(reader);
             }
             case "6" -> ProgrumRun.run(reader);
         }
@@ -78,21 +78,19 @@ public class HallController {
             int capacity = readCapacityHall(reader);
 
             hallFacade.create(new HallCreateDto(nameHall, capacity));
-        } catch (IOException | DateTimeParseException e) {
+        } catch (IOException e) {
             create(reader);
         }
     }
-
 
     private void update(BufferedReader reader) {
         try {
             Long id = readId(reader);
             String nameHall = readHallName(reader);
             int capacity = readCapacityHall(reader);
-
             hallFacade.update(new HallUpdateDto(id, nameHall, capacity));
         } catch (IOException e) {
-            update(reader);
+            run(reader);
         }
     }
 
@@ -101,23 +99,27 @@ public class HallController {
             Long id = readId(reader);
             hallFacade.delete(id);
         } catch (IOException e) {
-            delete(reader);
+            run(reader);
         }
     }
+
 
     private void findById(BufferedReader reader) {
         try {
             Long id = readId(reader);
             System.out.println(hallFacade.findById(id).toString());
         } catch (IOException e) {
-            findById(reader);
+            run(reader);
         }
     }
 
-    private void findAll() {
-        Hall[] halls = hallFacade.findAll();
-        for (Hall hall : halls) {
-            System.out.println(hall.toString());
+    private void findAll(BufferedReader reader) {
+        try {
+            for (Hall hall : hallFacade.findAll()) {
+                System.out.println(hall.toString());
+            }
+        } catch (IOException e) {
+            run(reader);
         }
     }
 

@@ -1,12 +1,10 @@
 package ua.com.alevel.util.valide;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import ua.com.alevel.util.ConstGlobal;
+
 import java.util.regex.Pattern;
 
 public abstract class BaseValide {
-
-    static final ResourceBundle settings = ResourceBundle.getBundle("message", Locale.ENGLISH);
 
     static final String REGEX_DATE = "(0?[1-9]|[12][0-9]|3[01]).(0?[1-9]|1[012]).((19|20)\\d\\d)";
     static final String REGEX_YEARS = "[0-9]{4}";
@@ -17,7 +15,7 @@ public abstract class BaseValide {
     public static boolean validName(String name, String messageEmpty) {
 
         if (name.isEmpty()) {
-            System.out.println(settings.getString(messageEmpty));
+            System.out.println(ConstGlobal.settings.getString(messageEmpty));
             return false;
         }
         return true;
@@ -25,11 +23,11 @@ public abstract class BaseValide {
 
     public static boolean validIdEntity(String id) {
         if (id.isEmpty()) {
-            System.out.println(settings.getString("id.empty"));
+            System.out.println(ConstGlobal.settings.getString("id.empty"));
             return false;
         }
         if (!Pattern.matches(REGEX_ID, id)) {
-            System.out.println(settings.getString("id.format"));
+            System.out.println(ConstGlobal.settings.getString("id.format"));
             return false;
         }
         return true;
@@ -37,11 +35,11 @@ public abstract class BaseValide {
 
     public static boolean validTime(String time, String messageEmpty, String messageFormat) {
         if (time.isEmpty()) {
-            System.out.println(settings.getString(messageEmpty));
+            System.out.println(ConstGlobal.settings.getString(messageEmpty));
             return false;
         }
         if (!Pattern.matches(REGEX_TIME, time)) {
-            System.out.println(settings.getString(messageFormat));
+            System.out.println(ConstGlobal.settings.getString(messageFormat));
             return false;
         }
         return true;

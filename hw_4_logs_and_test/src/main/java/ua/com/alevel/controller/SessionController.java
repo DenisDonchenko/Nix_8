@@ -20,7 +20,6 @@ public class SessionController {
     private final SessionFacade sessionFacade = new SessionFacadeImpl();
 
     public void run(BufferedReader reader) {
-        System.out.println("select your option");
         String position;
         try {
             runNavigation();
@@ -40,6 +39,7 @@ public class SessionController {
     private void runNavigation() {
         System.out.println();
         System.out.println("------------------------------SESSION----------------------------------");
+        System.out.println("                     Select your option                             ");
         System.out.println("Create session, please enter 1;      Update session, please enter 2");
         System.out.println("Delete session, please enter 3;      Find session by id, please enter 4");
         System.out.println("Find all session, please enter 5;    Exit to main menu, please enter 6");
@@ -67,7 +67,7 @@ public class SessionController {
             }
             case "5" -> {
                 System.out.println("                      Find all Sessions                               ");
-                findAll();
+                findAll(reader);
             }
             case "6" -> ProgrumRun.run(reader);
         }
@@ -106,7 +106,7 @@ public class SessionController {
 
             sessionFacade.update(new SessionUpdateDto(idSession, idFilm, idHall, dateSession, timeStart));
         } catch (IOException e) {
-            update(reader);
+            run(reader);
         }
     }
 
@@ -116,7 +116,7 @@ public class SessionController {
             Long idSession = readId(reader);
             sessionFacade.delete(idSession);
         } catch (IOException e) {
-            delete(reader);
+            run(reader);
         }
     }
 
@@ -126,14 +126,17 @@ public class SessionController {
             Long idSession = readId(reader);
             System.out.println(sessionFacade.findById(idSession).toString());
         } catch (IOException e) {
-            findById(reader);
+            run(reader);
         }
     }
 
-    private void findAll() {
-        SessionFindDto[] dtos = sessionFacade.findAll();
-        for (SessionFindDto dto : dtos) {
-            System.out.println(dto.toString());
+    private void findAll(BufferedReader reader) {
+        try {
+            for (SessionFindDto dto : sessionFacade.findAll()) {
+                System.out.println(dto.toString());
+            }
+        } catch (IOException e) {
+            run(reader);
         }
 
     }
@@ -166,6 +169,4 @@ public class SessionController {
         }
         return Long.parseLong(id);
     }
-
-
 }

@@ -13,6 +13,7 @@ import ua.com.alevel.service.impl.HallServiceImpl;
 import ua.com.alevel.service.impl.SessionServiceImpl;
 import ua.com.alevel.util.ConstGlobal;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -29,36 +30,66 @@ public class SessionFacadeImpl implements SessionFacade {
     }
 
     @Override
-    public void update(SessionUpdateDto sessionUpdateDto) {
-        Session session = updateSession(sessionUpdateDto);
-        sessionService.update(session);
-    }
-
-    @Override
-    public void delete(Long id) {
-        sessionService.delete(id);
-    }
-
-    @Override
-    public SessionFindDto findById(Long id) {
-        return createSessionForFind(sessionService.findById(id));
-    }
-
-    @Override
-    public SessionFindDto[] findAll() {
-        Session[] sessions = sessionService.findAll();
-        SessionFindDto[] sessionFindDto = new SessionFindDto[sessions.length];
-
-        for (int i = 0; i < sessions.length; i++) {
-            sessionFindDto[i] = createSessionForFind(sessions[i]);
+    public void update(SessionUpdateDto sessionUpdateDto) throws IOException {
+        if (!exists(sessionUpdateDto.getId_session())) {
+            System.out.println(ConstGlobal.settings.getString("session.id.not.found") + " " + sessionUpdateDto.getId_session());
+            ConstGlobal.loggerWarn.warn(ConstGlobal.settings.getString("session.id.not.found") + " " + sessionUpdateDto.getId_session());
+            throw new IOException();
+        } else {
+            Session session = updateSession(sessionUpdateDto);
+            sessionService.update(session);
         }
-        return sessionFindDto;
+    }
+
+    @Override
+    public void delete(Long id) throws IOException {
+        if (!exists(id)) {
+            System.out.println(ConstGlobal.settings.getString("session.id.not.found") + " " + id);
+            ConstGlobal.loggerWarn.warn(ConstGlobal.settings.getString("session.id.not.found") + " " + id);
+            throw new IOException();
+        } else
+            sessionService.delete(id);
+    }
+
+    @Override
+    public SessionFindDto findById(Long id) throws IOException {
+        if (!exists(id)) {
+            System.out.println(ConstGlobal.settings.getString("session.id.not.found") + " " + id);
+            ConstGlobal.loggerWarn.warn(ConstGlobal.settings.getString("session.id.not.found") + " " + id);
+            throw new IOException();
+        } else {
+            ConstGlobal.loggerInfo.info(ConstGlobal.settings.getString("session.find.by.id") + id);
+            return createSessionForFind(sessionService.findById(id));
+        }
+
+    }
+
+    @Override
+    public SessionFindDto[] findAll() throws IOException {
+        if (sessionService.count() == 0) {
+            System.out.println(ConstGlobal.settings.getString("session.does.not.exist"));
+            ConstGlobal.loggerWarn.warn(ConstGlobal.settings.getString("session.does.not.exist"));
+            throw new IOException();
+        } else {
+            Session[] sessions = sessionService.findAll();
+            SessionFindDto[] sessionFindDto = new SessionFindDto[sessions.length];
+
+            for (int i = 0; i < sessions.length; i++) {
+                sessionFindDto[i] = createSessionForFind(sessions[i]);
+            }
+            return sessionFindDto;
+        }
+    }
+
+    @Override
+    public boolean exists(Long id) {
+        return sessionService.exists(id);
     }
 
     private SessionFindDto createSessionForFind(Session session) {
 
         SessionFindDto sessionFindDto = new SessionFindDto();
-
+        sessionFindDto.setId(session.getId());
         String nameHall = hallService.findById(session.getIdHall()).getNameHall();
         String nameFilm = filmService.findById(session.getIdFilm()).getNameFilm();
 

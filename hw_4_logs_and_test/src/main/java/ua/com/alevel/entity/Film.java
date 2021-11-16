@@ -1,7 +1,5 @@
 package ua.com.alevel.entity;
 
-import ua.com.alevel.util.ConstGlobal;
-
 import java.time.LocalTime;
 
 public class Film extends BaseEntity {
@@ -37,11 +35,11 @@ public class Film extends BaseEntity {
 
     @Override
     public String toString() {
-        return "\"Film\" : {" +
-                "\n   \"id\": " + super.getId()  +
-                "\n   \"nameFilm\": " + nameFilm  +
-                "\n   \"yearIssue\": " + yearIssue +
-                "\n   \"filmDuration\": " + filmDuration.format(ConstGlobal.TIME_FORMATTER)  +
-                "\n}";
+        return "Film{" +
+                "idFilm='" + super.getId() + '\'' +
+                ", nameFilm='" + nameFilm + '\'' +
+                ", yearIssue='" + yearIssue + '\'' +
+                ", filmDuration=" + filmDuration +
+                '}';
     }
 }

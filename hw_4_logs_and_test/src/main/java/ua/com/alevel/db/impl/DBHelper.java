@@ -1,9 +1,10 @@
-package ua.com.alevel.util;
+package ua.com.alevel.db.impl;
 
 import java.util.Arrays;
 
-public final class DBHelper{
-    private DBHelper() {}
+public final class DBHelper {
+    private DBHelper() {
+    }
 
     public static <ARRAY> ARRAY[] newCapacity(int capacity, ARRAY[] array) {
         capacity = capacity + (capacity / 2);
@@ -11,7 +12,8 @@ public final class DBHelper{
 
         return array;
     }
-    public static <ARRAY> ARRAY[]  removeItems(ARRAY[] array, int... r) {
+
+    public static <ARRAY> ARRAY[] removeItems(ARRAY[] array, int... r) {
         int shift = 0;
         for (int i = 0; i < array.length; i++) {
             if (shift < r.length && i == r[shift])

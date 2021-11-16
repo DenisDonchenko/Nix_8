@@ -2,8 +2,10 @@ package ua.com.alevel.db.impl;
 
 import ua.com.alevel.db.SessionDB;
 import ua.com.alevel.entity.Session;
-import ua.com.alevel.util.DBHelper;
+import ua.com.alevel.util.ConstGlobal;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 public class SessionDBImpl implements SessionDB {
@@ -48,7 +50,7 @@ public class SessionDBImpl implements SessionDB {
     @Override
     public void delete(Long id) {
         int indexHall = findIndexById(id);
-        sessions = DBHelper.removeItems(sessions, indexHall);
+        sessions = DBHelper.removeItems(sessions, indexNewSession);
         realSizeArray--;
     }
 
@@ -74,8 +76,15 @@ public class SessionDBImpl implements SessionDB {
     }
 
     @Override
-    public int count() {
-        return realSizeArray;
+    public boolean exists(Long id) {
+        for (int i = 0; i < realSizeArray; i++) {
+            if (sessions[i] != null) {
+                if (sessions[i].getId() == id) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private int findIndexById(Long id) {
@@ -86,5 +95,34 @@ public class SessionDBImpl implements SessionDB {
             }
         }
         throw new RuntimeException("Session with id - " + id + " not found");
+    }
+
+    @Override
+    public boolean existsHallInSession(Long id) {
+        for (int i = 0; i < realSizeArray; i++) {
+            if (sessions[i] != null) {
+                if (sessions[i].getIdHall() == id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean existsFilmInSession(Long id) {
+        for (int i = 0; i < realSizeArray; i++) {
+            if (sessions[i] != null) {
+                if (sessions[i].getIdFilm() == id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int count() {
+        return realSizeArray;
     }
 }

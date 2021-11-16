@@ -31,6 +31,11 @@ public class FilmDaoImpl implements FilmDao {
     }
 
     @Override
+    public boolean exists(Long id) {
+        return FilmDBImpl.getInstance().exists(id);
+    }
+
+    @Override
     public int count() {
         return FilmDBImpl.getInstance().count();
     }

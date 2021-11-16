@@ -2,7 +2,6 @@ package ua.com.alevel.db.impl;
 
 import ua.com.alevel.db.HallDB;
 import ua.com.alevel.entity.Hall;
-import ua.com.alevel.util.DBHelper;
 
 import java.util.Objects;
 
@@ -19,6 +18,7 @@ public class HallDBImpl implements HallDB {
 
     private HallDBImpl() {
         halls = new Hall[capacity];
+        create(new Hall("Vip", 23));
     }
 
     public static HallDBImpl getInstance() {
@@ -59,7 +59,7 @@ public class HallDBImpl implements HallDB {
                 return hall;
             }
         }
-        throw new RuntimeException("Hall with id - " + id + " not found");
+        return null;
     }
 
     @Override
@@ -72,6 +72,18 @@ public class HallDBImpl implements HallDB {
 
         }
         return allHalls;
+    }
+
+    @Override
+    public boolean exists(Long id) {
+        for (int i = 0; i < realSizeArray; i++) {
+            if (halls[i] != null) {
+                if (halls[i].getId() == id) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

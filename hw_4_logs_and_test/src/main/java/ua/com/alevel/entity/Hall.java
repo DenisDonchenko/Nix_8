@@ -28,10 +28,10 @@ public class Hall extends BaseEntity {
 
     @Override
     public String toString() {
-        return "\"Hall\" : {" +
-                "\n   \"id\": " + super.getId() +
-                "\n   \"nameHall\": " + nameHall +
-                "\n   \"capacity\": " + capacity +
-                "\n}";
+        return "Hall{" +
+                " id='" + super.getId() + '\'' +
+                ", nameHall='" + nameHall + '\'' +
+                ", capacity=" + capacity +
+                '}';
     }
 }

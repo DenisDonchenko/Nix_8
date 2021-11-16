@@ -31,6 +31,11 @@ public class HallDaoImpl implements HallDao {
     }
 
     @Override
+    public boolean exists(Long id) {
+        return HallDBImpl.getInstance().exists(id);
+    }
+
+    @Override
     public int count() {
         return HallDBImpl.getInstance().count();
     }

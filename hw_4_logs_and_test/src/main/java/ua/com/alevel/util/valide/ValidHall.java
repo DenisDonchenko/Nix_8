@@ -1,5 +1,7 @@
 package ua.com.alevel.util.valide;
 
+import ua.com.alevel.util.ConstGlobal;
+
 import java.util.regex.Pattern;
 
 public final class ValidHall extends BaseValide {
@@ -9,11 +11,11 @@ public final class ValidHall extends BaseValide {
 
     public static boolean validCapacity(String capacity) {
         if (capacity.isEmpty()) {
-            System.out.println(settings.getString("hall.capacity.empty"));
+            System.out.println(ConstGlobal.settings.getString("hall.capacity.empty"));
             return false;
         }
         if (!Pattern.matches(REGEX_CAPACITY, capacity)) {
-            System.out.println(settings.getString("hall.capacity.format"));
+            System.out.println(ConstGlobal.settings.getString("hall.capacity.format"));
             return false;
         }
         return true;

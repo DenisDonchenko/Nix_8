@@ -1,20 +1,25 @@
 package ua.com.alevel.dto.sessions;
 
-import ua.com.alevel.util.ConstGlobal;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SessionFindDto {
-
+    private Long id;
     private String nameFilm;
     private LocalDate dateSession;
     private LocalTime timeStart;
     private LocalTime timeFinish;
     private String nameHall;
 
-
     public SessionFindDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNameFilm() {
@@ -60,11 +65,12 @@ public class SessionFindDto {
     @Override
     public String toString() {
         return "SessionFindDto{" +
-                "Name film -'" + nameFilm + '\'' +
-                ", date session - " + dateSession.format(ConstGlobal.DATE_FORMATTER) +
-                ", show start time - " + timeStart.format(ConstGlobal.TIME_FORMATTER) +
-                ", show finish time - " + timeFinish.format(ConstGlobal.TIME_FORMATTER) +
-                ", name hall - '" + nameHall + '\'' +
+                "id=" + id +
+                ", nameFilm='" + nameFilm + '\'' +
+                ", dateSession=" + dateSession +
+                ", timeStart=" + timeStart +
+                ", timeFinish=" + timeFinish +
+                ", nameHall='" + nameHall + '\'' +
                 '}';
     }
 }

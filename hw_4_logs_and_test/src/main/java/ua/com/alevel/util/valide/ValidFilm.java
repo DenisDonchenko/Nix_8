@@ -1,5 +1,7 @@
 package ua.com.alevel.util.valide;
 
+import ua.com.alevel.util.ConstGlobal;
+
 import java.util.regex.Pattern;
 
 public final class ValidFilm extends BaseValide {
@@ -9,18 +11,17 @@ public final class ValidFilm extends BaseValide {
 
     public static boolean validYear(String year) {
         if (year.isEmpty()) {
-            System.out.println(settings.getString("film.year.empty"));
+            System.out.println(ConstGlobal.settings.getString("film.year.empty"));
             return false;
         }
         if (!Pattern.matches(REGEX_YEARS, year)) {
-            System.out.println(settings.getString("film.year.format"));
+            System.out.println(ConstGlobal.settings.getString("film.year.format"));
             return false;
         }
         if (year.length() != 4) {
-            System.out.println(settings.getString("film.year.length.format"));
+            System.out.println(ConstGlobal.settings.getString("film.year.length.format"));
             return false;
         }
         return true;
     }
-
 }

@@ -2,8 +2,9 @@ package ua.com.alevel.db.impl;
 
 import ua.com.alevel.db.FilmDB;
 import ua.com.alevel.entity.Film;
-import ua.com.alevel.util.DBHelper;
 
+import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FilmDBImpl implements FilmDB {
@@ -19,6 +20,7 @@ public class FilmDBImpl implements FilmDB {
 
     private FilmDBImpl() {
         films = new Film[capacity];
+        create(new Film("Film1", "2021", LocalTime.parse("02:12")));
     }
 
     public static FilmDBImpl getInstance() {
@@ -42,7 +44,6 @@ public class FilmDBImpl implements FilmDB {
 
     @Override
     public void update(Film film) {
-
         films[findIndexById(film.getId())] = film;
     }
 
@@ -51,6 +52,11 @@ public class FilmDBImpl implements FilmDB {
         int indexFilm = findIndexById(id);
         films = DBHelper.removeItems(films, indexFilm);
         realSizeArray--;
+    }
+
+    @Override
+    public int count() {
+        return realSizeArray;
     }
 
     @Override
@@ -75,8 +81,15 @@ public class FilmDBImpl implements FilmDB {
     }
 
     @Override
-    public int count() {
-        return realSizeArray;
+    public boolean exists(Long id) {
+        for (int i = 0; i < realSizeArray; i++) {
+            if (films[i] != null) {
+                if (films[i].getId() == id) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private int findIndexById(Long id) {

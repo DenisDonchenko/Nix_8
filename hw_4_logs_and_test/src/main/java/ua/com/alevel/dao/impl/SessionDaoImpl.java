@@ -1,6 +1,7 @@
 package ua.com.alevel.dao.impl;
 
 import ua.com.alevel.dao.SessionDao;
+import ua.com.alevel.db.impl.HallDBImpl;
 import ua.com.alevel.db.impl.SessionDBImpl;
 import ua.com.alevel.entity.Session;
 
@@ -31,9 +32,23 @@ public class SessionDaoImpl implements SessionDao {
     }
 
     @Override
-    public int count() {
-        return SessionDBImpl.getInstance().count();
+    public boolean exists(Long id) {
+        return HallDBImpl.getInstance().exists(id);
     }
 
 
+    @Override
+    public boolean existsHallInSession(Long id) {
+        return SessionDBImpl.getInstance().existsHallInSession(id);
+    }
+
+    @Override
+    public boolean existsFilmInSession(Long id) {
+        return SessionDBImpl.getInstance().existsFilmInSession(id);
+    }
+
+    @Override
+    public int count() {
+        return SessionDBImpl.getInstance().count();
+    }
 }

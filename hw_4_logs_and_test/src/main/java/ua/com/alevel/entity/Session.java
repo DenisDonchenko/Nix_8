@@ -1,7 +1,5 @@
 package ua.com.alevel.entity;
 
-import ua.com.alevel.util.ConstGlobal;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,8 +13,8 @@ public class Session extends BaseEntity {
     private LocalTime timeFinish;
     private int freePlaces;
 
-        public Session(Long idFilm, Long idHall, LocalDate dateSession,
-                       LocalTime timeStart, LocalTime timeFinish, int freePlaces) {
+    public Session(Long idFilm, Long idHall, LocalDate dateSession,
+                   LocalTime timeStart, LocalTime timeFinish, int freePlaces) {
         this.idFilm = idFilm;
         this.idHall = idHall;
         this.dateSession = dateSession;
@@ -71,14 +69,14 @@ public class Session extends BaseEntity {
 
     @Override
     public String toString() {
-        return "\"Session\" : {" +
-                "\n   \"id\": " + super.getId() +
-                "\n   \"idFilm\": " + idFilm +
-                "\n   \"idHall\": " + idHall +
-                "\n   \"dateSession\": " + dateSession.format(ConstGlobal.DATE_FORMATTER) +
-                "\n   \"timeStart\": " + timeStart.format(ConstGlobal.TIME_FORMATTER) +
-                "\n   \"timeFinish\": " + timeFinish.format(ConstGlobal.TIME_FORMATTER) +
-                "\n   \"freePlaces\": " + freePlaces +
-                "\n}";
+        return "Session{" +
+                ", idSession=" + super.getId() +
+                ", idFilm=" + idFilm +
+                ", idHall=" + idHall +
+                ", dateSession=" + dateSession +
+                ", timeStart=" + timeStart +
+                ", timeFinish=" + timeFinish +
+                ", freePlaces=" + freePlaces +
+                '}';
     }
 }

@@ -18,7 +18,6 @@ public class FilmController {
     private final FilmFacade filmFacade = new FilmFacadeImpl();
 
     public void run(BufferedReader reader) {
-        System.out.println("select your option");
         String position;
         try {
             runNavigation();
@@ -38,6 +37,7 @@ public class FilmController {
     private void runNavigation() {
         System.out.println();
         System.out.println("---------------------------FILM------------------------------------");
+        System.out.println("                     Select your option                             ");
         System.out.println("Create film, please enter 1;      Update film, please enter 2");
         System.out.println("Delete film, please enter 3;      Find film by id, please enter 4");
         System.out.println("Find all films, please enter 5;   Exit to main menu, please enter 6");
@@ -65,7 +65,7 @@ public class FilmController {
             }
             case "5" -> {
                 System.out.println("                      Find all films                               ");
-                findAll();
+                findAll(reader);
             }
             case "6" -> ProgrumRun.run(reader);
         }
@@ -94,7 +94,7 @@ public class FilmController {
 
             filmFacade.update(new UpdateFilmDto(id, nameFilm, yearIssue, filmDuration));
         } catch (IOException e) {
-            update(reader);
+            run(reader);
         }
     }
 
@@ -103,7 +103,7 @@ public class FilmController {
             Long id = readIdFilm(reader);
             filmFacade.delete(id);
         } catch (IOException e) {
-            delete(reader);
+            run(reader);
         }
     }
 
@@ -112,14 +112,17 @@ public class FilmController {
             Long id = readIdFilm(reader);
             System.out.println(filmFacade.findById(id).toString());
         } catch (IOException e) {
-            findById(reader);
+            run(reader);
         }
     }
 
-    private void findAll() {
-        Film[] films = filmFacade.findAll();
-        for (Film film : filmFacade.findAll()) {
-            System.out.println(film.toString());
+    private void findAll(BufferedReader reader) {
+        try {
+            for (Film film : filmFacade.findAll()) {
+                System.out.println(film.toString());
+            }
+        } catch (IOException e) {
+            run(reader);
         }
     }
 
