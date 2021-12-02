@@ -1,11 +1,9 @@
-package ua.com.alevel.calendar.entity;
+package ua.com.alevel.calendar.date;
 
 import ua.com.alevel.calendar.util.Months;
 
-import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class Date {
     private int day;

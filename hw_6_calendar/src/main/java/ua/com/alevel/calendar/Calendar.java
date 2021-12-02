@@ -1,6 +1,6 @@
 package ua.com.alevel.calendar;
 
-import ua.com.alevel.calendar.entity.Date;
+import ua.com.alevel.calendar.date.Date;
 import ua.com.alevel.calendar.util.Months;
 
 import java.util.Arrays;
