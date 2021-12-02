@@ -174,6 +174,7 @@ public class MathSet<N extends Number> implements Set<Number> {
             throw new IndexOutOfBoundsException();
         }
     }
+
     @Override
     public Number getMin() {
         Number min = arraySet[0];
@@ -308,9 +309,9 @@ public class MathSet<N extends Number> implements Set<Number> {
         }
         for (int i = 0; i < realSizeArray; i++) {
             if (i == 0) {
-                arrayString += " " + "[" + i + "]" + arraySet[i];
+                arrayString += " " + arraySet[i];
             } else
-                arrayString += ", " + "[" + i + "]" + arraySet[i];
+                arrayString += ", " + arraySet[i];
         }
 
         return "MathSet : [ " + arrayString + " ]";

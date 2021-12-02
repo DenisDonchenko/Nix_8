@@ -1,6 +1,7 @@
 package ua.com.alevel;
 
 import ua.com.alevel.mat.set.impl.MathSet;
+import ua.com.alevel.mat.set.util.valide.BaseValide;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,10 +14,6 @@ import java.util.regex.Pattern;
 public class ProgramRun {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public void start() {
-        startRun();
-    }
-
     public void startRun() {
         startRunNavigation();
         String event;
@@ -27,15 +24,18 @@ public class ProgramRun {
 
                 case "1" -> {
                     mathSet = new MathSet<>();
+                    navigationMethodsPreview();
                     navigationMethods(mathSet);
                 }
                 case "2" -> {
                     int capacity = readCapacity();
                     mathSet = new MathSet<>(capacity);
+                    navigationMethodsPreview();
                     navigationMethods(mathSet);
                 }
                 case "3" -> {
                     mathSet = new MathSet<>(readValues());
+                    navigationMethodsPreview();
                     navigationMethods(mathSet);
                 }
                 case "0" -> System.exit(0);
@@ -48,92 +48,110 @@ public class ProgramRun {
     }
 
     public static void navigationMethods(MathSet<Number> numberMathSet) {
-        navigationMethodsPreview();
+        System.out.println("\nMake your choice\n");
         String event;
         try {
             while ((event = reader.readLine()) != null) {
                 switch (event) {
                     case "1" -> {
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "2" -> {
+                        System.out.println("Add values");
                         Number[] numbers = readValues();
                         numberMathSet.add(numbers);
                         navigationMethods(numberMathSet);
                     }
                     case "3" -> {
+                        System.out.println("Join");
                         numberMathSet.join(createMathSet());
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "4" -> {
+                        System.out.println("Intersection");
                         numberMathSet.intersection(createMathSet());
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "5" -> {
+                        System.out.println("Desc MathSet");
                         numberMathSet.sortDesc();
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "6" -> {
+                        System.out.println("Desc MathSet between indexes");
                         List<Integer> index = readIndices(numberMathSet.length());
                         numberMathSet.sortDesc(index.get(0), index.get(1));
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "7" -> {
+                        System.out.println("Asc MathSet ");
                         numberMathSet.sortAsc();
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "8" -> {
+                        System.out.println("Asc MathSet between indexes");
                         List<Integer> index = readIndices(numberMathSet.length());
                         numberMathSet.sortAsc(index.get(0), index.get(1));
-                        System.out.println(numberMathSet.toString());
+                        System.out.println(numberMathSet);
                         navigationMethods(numberMathSet);
                     }
                     case "9" -> {
+                        System.out.println("Get value by index");
                         int index = readIndex(numberMathSet.length());
                         Number number = numberMathSet.get(index);
                         System.out.println("Number is " + number.doubleValue() + " by index " + index);
                         navigationMethods(numberMathSet);
                     }
                     case "10" -> {
+                        System.out.println("Get max value ");
                         Number number = numberMathSet.getMax();
                         System.out.println("Max value -  " + number.doubleValue());
                         navigationMethods(numberMathSet);
                     }
                     case "11" -> {
+                        System.out.println("Get min value ");
                         Number number = numberMathSet.getMin();
                         System.out.println("Min value -  " + number.doubleValue());
                         navigationMethods(numberMathSet);
                     }
                     case "12" -> {
+                        System.out.println("Get length MathSet ");
                         Number number = numberMathSet.length();
                         System.out.println("Length mathSet -  " + number.doubleValue());
                         navigationMethods(numberMathSet);
                     }
                     case "13" -> {
+                        System.out.println("Get average MathSet ");
                         Number number = numberMathSet.getAverage();
                         System.out.println("Average mathSet -  " + number.doubleValue());
                         navigationMethods(numberMathSet);
                     }
                     case "14" -> {
+                        System.out.println("Get median MathSet ");
                         Number number = numberMathSet.getMedian();
                         System.out.println("Median mathSet -  " + number.doubleValue());
                         navigationMethods(numberMathSet);
                     }
                     case "15" -> {
+                        System.out.println("Clear MathSet ");
                         numberMathSet.clear();
                         System.out.println("MathSet is clear");
                         navigationMethods(numberMathSet);
                     }
                     case "16" -> {
+                        System.out.println("Clear MathSet ");
                         Number[] numbers = readValues();
                         numberMathSet.clear(numbers);
                         navigationMethods(numberMathSet);
+                    }
+                    case "menu" -> {
+                        navigationMethodsPreview();
                     }
                     case "0" -> System.exit(0);
                     default -> navigationMethods(numberMathSet);
@@ -146,7 +164,7 @@ public class ProgramRun {
 
     private static void navigationMethodsPreview() {
         System.out.println();
-        System.out.println(
+        System.out.println("Show menu, enter menu \n" +
                 "Print mathSet, enter - 1     \t|\tAdd values, enter - 2\n" +
                         "Join math set, enter - 3     \t|\tIntersection math set, enter - 4\n" +
                         "Sort desc, enter - 5         \t|\tSort desc between firstIndex and  lastIndex, enter - 6\n" +
@@ -154,7 +172,8 @@ public class ProgramRun {
                         "Get value by index, enter - 9\t|\tGet max value, enter - 10\n" +
                         "Get min value, enter - 11    \t|\tGet length , enter - 12\n" +
                         "Get average value, enter - 13\t|\tGet median value, enter - 14\n" +
-                        "Clear all MathSet, enter - 15\t|\tClear values in MathSet, enter - 16\n"
+                        "Clear all MathSet, enter - 15\t|\tClear values in MathSet, enter - 16\n"+" Exit, enter 0"
+
         );
     }
 
@@ -183,12 +202,7 @@ public class ProgramRun {
             System.out.println("Error input index");
             readIndex(lengthArray);
         }
-        if (index >= lengthArray) {
-            System.out.println("The entered index is out of range from 1 to " + lengthArray);
-            readIndex(lengthArray);
-        }
-        if (index < 1) {
-            System.out.println("The entered index is out of the possible value - " + lengthArray);
+        if (!BaseValide.validIndex(index, lengthArray)) {
             readIndex(lengthArray);
         }
 
@@ -209,16 +223,7 @@ public class ProgramRun {
             System.out.println("Input Error!!! Enter not a number!!!");
             readIndices(lengthArray);
         }
-        if (lastIndex < firstIndex) {
-            System.out.println("Input Error!!! First index should be less last index!");
-            readIndices(lengthArray);
-        }
-        if (lastIndex >= lengthArray || firstIndex >= lengthArray) {
-            System.out.println("The entered index is out of range from 1 to " + lengthArray);
-            readIndices(lengthArray);
-        }
-        if (lastIndex < 1 || firstIndex < 1) {
-            System.out.println("The entered index is out of the possible value - " + lengthArray);
+        if (!BaseValide.validIndexes(firstIndex,lastIndex,lengthArray)){
             readIndices(lengthArray);
         }
 
@@ -261,6 +266,4 @@ public class ProgramRun {
         }
         return capacity;
     }
-
-
 }
