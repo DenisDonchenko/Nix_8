@@ -105,14 +105,18 @@ public class MathSet<N extends Number> implements Set<Number> {
 
     @Override
     public void sortDesc(int firstIndex, int lastIndex) {
-        for (int i = firstIndex; i < lastIndex + 1; i++) {
-            Number max = arraySet[i];
-            int j = i - 1;
-            while (j >= firstIndex && arraySet[j].doubleValue() < max.doubleValue()) {
-                arraySet[j + 1] = arraySet[j];
-                j--;
+        try {
+            for (int i = firstIndex; i < lastIndex + 1; i++) {
+                Number max = arraySet[i];
+                int j = i - 1;
+                while (j >= firstIndex && arraySet[j].doubleValue() < max.doubleValue()) {
+                    arraySet[j + 1] = arraySet[j];
+                    j--;
+                }
+                arraySet[j + 1] = max;
             }
-            arraySet[j + 1] = max;
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Index out of bounds for length " + length());
         }
     }
 
@@ -139,14 +143,18 @@ public class MathSet<N extends Number> implements Set<Number> {
 
     @Override
     public void sortAsc(int firstIndex, int lastIndex) {
-        for (int i = firstIndex; i < lastIndex + 1; i++) {
-            Number max = arraySet[i];
-            int j = i - 1;
-            while (j >= firstIndex && arraySet[j].doubleValue() > max.doubleValue()) {
-                arraySet[j + 1] = arraySet[j];
-                j--;
+        try {
+            for (int i = firstIndex; i < lastIndex + 1; i++) {
+                Number max = arraySet[i];
+                int j = i - 1;
+                while (j >= firstIndex && arraySet[j].doubleValue() > max.doubleValue()) {
+                    arraySet[j + 1] = arraySet[j];
+                    j--;
+                }
+                arraySet[j + 1] = max;
             }
-            arraySet[j + 1] = max;
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Index out of bounds for length " + length());
         }
     }
 
@@ -166,8 +174,6 @@ public class MathSet<N extends Number> implements Set<Number> {
             throw new IndexOutOfBoundsException();
         }
     }
-
-
     @Override
     public Number getMin() {
         Number min = arraySet[0];
@@ -229,10 +235,15 @@ public class MathSet<N extends Number> implements Set<Number> {
         int lengthArray = (lastIndex - firstIndex) + 1;
 
         Number[] numbersArray = new Number[lengthArray];
-        int indexArrayReturn = 0;
-        for (int i = firstIndex; i <= lastIndex; i++) {
-            numbersArray[indexArrayReturn] = arraySet[i];
-            indexArrayReturn++;
+        try {
+            int indexArrayReturn = 0;
+            for (int i = firstIndex; i <= lastIndex; i++) {
+                numbersArray[indexArrayReturn] = arraySet[i];
+                indexArrayReturn++;
+            }
+
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Index out of bounds for length " + length());
         }
         return numbersArray;
     }
@@ -240,12 +251,15 @@ public class MathSet<N extends Number> implements Set<Number> {
     @Override
     public MathSet cut(int firstIndex, int lastIndex) {
         int lengthArray = (lastIndex - firstIndex) + 1;
-
         Number[] numbersCut = new Number[lengthArray];
-        int indexArrayReturn = 0;
-        for (int i = firstIndex; i <= lastIndex; i++) {
-            numbersCut[indexArrayReturn] = arraySet[i];
-            indexArrayReturn++;
+        try {
+            int indexArrayReturn = 0;
+            for (int i = firstIndex; i <= lastIndex; i++) {
+                numbersCut[indexArrayReturn] = arraySet[i];
+                indexArrayReturn++;
+            }
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println("Index out of bounds for length " + length());
         }
         return new MathSet(numbersCut);
     }
