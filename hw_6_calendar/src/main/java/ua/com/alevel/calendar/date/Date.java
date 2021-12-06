@@ -53,6 +53,7 @@ public class Date {
 
     public void setYear(int year) {
         this.year = year;
+        this.leapYear = isLeapYear();
     }
 
     public int getHour() {
@@ -103,46 +104,108 @@ public class Date {
         this.outputFormat = outputFormat;
     }
 
-    private boolean isLeapYear() {
+    public boolean isLeapYear() {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
     }
 
     @Override
     public String toString() {
-        String[] dateFormat = isFormat();
-        String delimeter = isDelimeter();
+
+        String[] dateTime;
+        String delimeter = "";
+        String[] dateFormat;
+        String[] timeFormat = new String[0];
+        String time = " ";
         String inputDate = "";
 
-        for (int i = 0; i < dateFormat.length; i++) {
-            if (i == 2) {
-                inputDate += formatDate(dateFormat[i]);
-            } else inputDate += formatDate(dateFormat[i]) + delimeter;
+        if (outputFormat.contains(":")) {
+            dateTime = outputFormat.trim().split(" ");
+            delimeter = isDelimeter(dateTime[0]);
+            dateFormat = isFormat(delimeter, dateTime[0]);
+            timeFormat = dateTime[1].trim().split(":");
+            time += formatTime(timeFormat);
+        } else {
+            delimeter = isDelimeter(outputFormat);
+            dateFormat = isFormat(delimeter, outputFormat);
         }
-        return inputDate;
 
+        if (outputFormat.contains("mmm")) {
+            for (int i = 0; i < dateFormat.length; i++) {
+                inputDate += formatDate(dateFormat[i]) + " ";
+            }
+        } else {
+            for (int i = 0; i < dateFormat.length; i++) {
+                if (i == 2) {
+                    inputDate += formatDate(dateFormat[i]);
+                } else inputDate += formatDate(dateFormat[i]) + delimeter;
+            }
+        }
+        inputDate += time;
+        return inputDate;
     }
 
-    private String isDelimeter() {
+    private String isDelimeter(String dateTimeFormat) {
         Pattern pattern = Pattern.compile("[/|-]");
-        Matcher matcher = pattern.matcher(outputFormat);
+        Matcher matcher = pattern.matcher(dateTimeFormat);
         String delimeter = "";
 
         while (matcher.find()) {
-            delimeter = outputFormat.substring(matcher.start(), matcher.end());
+            delimeter = dateTimeFormat.substring(matcher.start(), matcher.end());
         }
         return delimeter;
     }
 
-    private String[] isFormat() {
+    private String[] isFormat(String delimeter, String outputFormatDate) {
         Pattern pattern = Pattern.compile("[/|-]");
-        Matcher matcher = pattern.matcher(outputFormat);
-        String delimeter = "";
+        Matcher matcher = pattern.matcher(outputFormatDate);
 
-        while (matcher.find()) {
-            delimeter = outputFormat.substring(matcher.start(), matcher.end());
-        }
-        String[] date = outputFormat.split(delimeter);
+        String[] date = outputFormatDate.split(delimeter);
         return date;
+    }
+
+
+    private String formatTime(String[] formatElement) {
+        String timeString = "";
+        String hourString = "";
+        String minuteString = "";
+        String secondString = "";
+        String millisecondString = "";
+
+        int lengthTime = formatElement.length;
+
+        if (hour < 10) {
+            hourString += "0" + hour;
+        } else hourString += "" + hour;
+        timeString += hourString + ":";
+        if (minute < 10) {
+            minuteString += "0" + minute;
+        } else minuteString += "" + minute;
+        timeString += minuteString;
+
+        if (lengthTime == 3) {
+            if (second < 10) {
+                secondString += "0" + second;
+            } else secondString += "" + second;
+            timeString += ":" + secondString;
+        }
+        if (lengthTime == 4) {
+            if (second < 10) {
+                secondString += "0" + second;
+            } else secondString += "" + second;
+            timeString += ":" + secondString;
+            if (formatElement[3].contains("00")) {
+                if (millisecond < 10) {
+                    millisecondString += "0" + millisecond;
+                } else millisecondString += "" + millisecond;
+            }
+           /* if (formatElement[3].contains("000")) {
+                if (millisecond < 10) {
+                    millisecondString += "0" + millisecond;
+                } else millisecondString += "" + millisecond;
+            }*/
+            timeString += ":" + millisecondString;
+        }
+        return timeString;
     }
 
     private String formatDate(String formatElement) {

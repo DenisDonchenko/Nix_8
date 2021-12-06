@@ -37,25 +37,39 @@ public enum Months {
             try {
                 throw new Exception();
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return ENUMS[index - 1];
     }
 
-
-    public int length(boolean leapYear) {
-        switch (this) {
-            case FEBRUARY:
-                return (leapYear ? 29 : 28);
-            case APRIL:
-            case JUNE:
-            case SEPTEMBER:
-            case NOVEMBER:
-                return 30;
-            default:
-                return 31;
-        }
+    public static Months plusMonth(int monthNew) {
+        return Months.getMonthByIndex(monthNew);
     }
 
+    public static Months minusMonth(Months months, int countMonth) {
+        int indexMonth = (months.getIndex() - countMonth) % 12;
+        return Months.getMonthByIndex(Math.abs(indexMonth));
+    }
+
+    public int length(boolean leapYear) {
+        return switch (this) {
+            case FEBRUARY -> (leapYear ? 129 : 28);
+            case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
+            default -> 31;
+        };
+    }
+
+    public static int lengthMonth(Months month, boolean leapYear) {
+        switch (month) {
+            case FEBRUARY -> {
+                return leapYear ? 29 : 28;
+            }
+            case APRIL, JUNE, SEPTEMBER, NOVEMBER -> {
+                return 30;
+            }
+            default -> {
+                return 31;
+            }
+        }
+    }
 }
