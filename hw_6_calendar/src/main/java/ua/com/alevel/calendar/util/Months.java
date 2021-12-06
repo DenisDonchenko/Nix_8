@@ -42,15 +42,6 @@ public enum Months {
         return ENUMS[index - 1];
     }
 
-    public static Months plusMonth(int monthNew) {
-        return Months.getMonthByIndex(monthNew);
-    }
-
-    public static Months minusMonth(Months months, int countMonth) {
-        int indexMonth = (months.getIndex() - countMonth) % 12;
-        return Months.getMonthByIndex(Math.abs(indexMonth));
-    }
-
     public int length(boolean leapYear) {
         return switch (this) {
             case FEBRUARY -> (leapYear ? 129 : 28);

@@ -59,7 +59,7 @@ public class Calendar implements BaseCalendar {
         int newYear = (int) Math.floorDiv(calcMonths, 12);
         int newMonth = Math.floorMod(calcMonths, 12) + 1;
         date.setYear(newYear);
-        date.setMonth(Months.plusMonth(Math.abs(newMonth)));
+        date.setMonth(Months.getMonthByIndex(Math.abs(newMonth)));
     }
 
     @Override
