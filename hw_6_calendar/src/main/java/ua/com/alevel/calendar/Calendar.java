@@ -3,7 +3,7 @@ package ua.com.alevel.calendar;
 import ua.com.alevel.calendar.date.Date;
 import ua.com.alevel.calendar.util.Months;
 
-public class Calendar implements BaseCalendar {
+public class Calendar  {
 
     private final Date date;
     private final String inputFormatByDefault = "dd-mm-yyyy";
@@ -17,42 +17,34 @@ public class Calendar implements BaseCalendar {
         this.date = new Date(day, Months.getMonthByIndex(moth), year, 0, 0, 0, 0, inputFormatByDefault, outputFormatDefault);
     }
 
-    @Override
     public String getDate() {
         return date.toString();
     }
 
-    @Override
     public void editFormatInput(String inputFormat) {
         this.date.setInputFormat(inputFormat);
     }
 
-    @Override
     public void editFormatOutput(String outputFormat) {
         this.date.setOutputFormat(outputFormat);
     }
 
-    @Override
     public int lengthMonth() {
         return date.getMonth().length(date.isLeapYear());
     }
 
-    @Override
     public void plusYears(int yearsToAdd) {
         date.setYear(date.getYear() + yearsToAdd);
     }
 
-    @Override
     public void minusYears(int yearsToRemove) {
         date.setYear(date.getYear() - yearsToRemove);
     }
 
-    @Override
     public void minusMonths(int monthsToRemove) {
         plusMonths(-monthsToRemove);
     }
 
-    @Override
     public void plusMonths(int monthsToAdd) {
         long monthCount = date.getYear() * 12L + (date.getMonth().getIndex() - 1);
         long calcMonths = monthCount + monthsToAdd;
@@ -62,42 +54,34 @@ public class Calendar implements BaseCalendar {
         date.setMonth(Months.getMonthByIndex(Math.abs(newMonth)));
     }
 
-    @Override
     public void minusDays(int daysToRemove) {
         plusDays(-daysToRemove);
     }
 
-    @Override
     public void plusHours(int hoursToAdd) {
 
     }
 
-    @Override
     public void minusHours(int hoursToRemove) {
 
     }
 
-    @Override
     public void plusMinutes(int minutesToAdd) {
 
     }
 
-    @Override
     public void minusMinutes(int minutesToRemove) {
 
     }
 
-    @Override
     public void plusSeconds(int secondsToAdd) {
 
     }
 
-    @Override
     public void minusSeconds(int secondsToRemove) {
 
     }
 
-    @Override
     public void plusDays(int daysToAdd) {
         int offset = offsetDays(date.getDay(), date.getMonth().getIndex());
         int remDays = date.isLeapYear() ? (366 - offset) : (365 - offset);
