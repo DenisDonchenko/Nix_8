@@ -1,6 +1,7 @@
 package ua.com.alevel.unique.name;
 
 import ua.com.alevel.util.ConstGlobal;
+import ua.com.alevel.util.FileHelper;
 
 import java.io.*;
 import java.util.*;
@@ -11,9 +12,16 @@ public class UniqueNames {
     private String uniqueName = "";
 
     public void run() {
+        FileHelper.createFolders(ConstGlobal.FOLDERS_UNIQUE_NAME);
+        FileHelper.createFile(ConstGlobal.PATH_TO_FILE_UNIQUE_NAME_INPUT, ConstGlobal.PATH_TO_FILE_UNIQUE_NAME_OUTPUT);
+
         readNames();
-        searchUniqueName();
-        writerName(uniqueName);
+        if (strings.isEmpty()) {
+            FileHelper.writerTextToFile(ConstGlobal.PATH_TO_FILE_UNIQUE_NAME_OUTPUT, "File is empty");
+        } else {
+            searchUniqueName();
+            FileHelper.writerTextToFile(ConstGlobal.PATH_TO_FILE_UNIQUE_NAME_OUTPUT, uniqueName);
+        }
     }
 
     private void searchUniqueName() {
@@ -23,14 +31,6 @@ public class UniqueNames {
                     .collect(Collectors.toList()).get(0);
         } catch (IndexOutOfBoundsException er) {
             uniqueName = "File does not contain unique names";
-        }
-    }
-
-    private void writerName(String text) {
-        try (BufferedWriter writter = new BufferedWriter(new FileWriter(ConstGlobal.PATH_TO_FILE_UNIQUE_NAME_OUTPUT))) {
-            writter.write(text + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -44,9 +44,6 @@ public class UniqueNames {
         strings = reader.lines()
                 .flatMap(line -> Arrays.stream(line.split("[-.?!)(,:/ ]")))
                 .collect(Collectors.toList());
-        if (strings.isEmpty()) {
-            writerName("File is empty");
-            System.exit(0);
-        }
+
     }
 }

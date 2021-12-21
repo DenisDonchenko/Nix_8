@@ -3,6 +3,7 @@ package ua.com.alevel.list.date;
 import ua.com.alevel.list.date.util.ParseDate;
 import ua.com.alevel.list.date.util.ValidationDate;
 import ua.com.alevel.util.ConstGlobal;
+import ua.com.alevel.util.FileHelper;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,8 +15,14 @@ public class DateLIst {
     private List<String> datesList = new ArrayList<>();
 
     public void run() {
+        FileHelper.createFolders(ConstGlobal.FOLDERS_LIST_DATES);
+        FileHelper.createFile(ConstGlobal.PATH_TO_FILE_LIST_DATES_INPUT, ConstGlobal.PATH_TO_FILE_LIST_DATES_OUTPUT);
         readNames();
-        writeDateToFile();
+        if (datesList.isEmpty()) {
+            FileHelper.writerTextToFile(ConstGlobal.PATH_TO_FILE_LIST_DATES_OUTPUT, "The file does not contain dates of the following formats \nyyyy-MM-dd\nyyyy/MM/dd\ndd-MM-yyyy\ndd/MM/yyyy \nor  file is empty");
+        } else {
+            writeDateToFile();
+        }
     }
 
     private void readNames() {
@@ -29,23 +36,11 @@ public class DateLIst {
                 .flatMap(line -> Arrays.stream(line.split("[.?!)(,: ]")))
                 .collect(Collectors.toList())
                 .stream().filter(DateLIst::validDate).collect(Collectors.toList());
-        if (datesList.isEmpty()) {
-            writerDate("The file does not contain dates of the following formats \nyyyy-MM-dd\nyyyy/MM/dd\ndd-MM-yyyy\ndd/MM/yyyy \nor  file is empty");
-            System.exit(0);
-        }
-    }
-
-    private void writerDate(String text) {
-        try (BufferedWriter writter = new BufferedWriter(new FileWriter(ConstGlobal.PATH_TO_FILE_LIST_DATES_OUTPUT))) {
-            writter.write(text + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void writeDateToFile() {
         datesList = datesList.stream().map(ParseDate::convertToDateString).collect(Collectors.toList());
-        writerDate(datesList.toString());
+        FileHelper.writerTextToFile(ConstGlobal.PATH_TO_FILE_LIST_DATES_OUTPUT, datesList.toString());
     }
 
     private static boolean validDate(String date) {
