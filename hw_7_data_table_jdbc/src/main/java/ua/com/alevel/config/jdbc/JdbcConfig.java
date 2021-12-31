@@ -1,4 +1,4 @@
-package ua.com.alevel.jdbc;
+package ua.com.alevel.config.jdbc;
 
 import java.sql.Connection;
 import java.sql.Statement;

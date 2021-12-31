@@ -1,8 +1,8 @@
-package ua.com.alevel.jdbc.impl;
+package ua.com.alevel.config.jdbc.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.alevel.jdbc.JdbcConfig;
-import ua.com.alevel.jdbc.JdbcPropertyConfig;
+import ua.com.alevel.config.jdbc.JdbcConfig;
+import ua.com.alevel.config.jdbc.JdbcPropertyConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

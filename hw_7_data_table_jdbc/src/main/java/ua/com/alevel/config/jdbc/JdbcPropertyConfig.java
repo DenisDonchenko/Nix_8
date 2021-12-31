@@ -1,4 +1,4 @@
-package ua.com.alevel.jdbc;
+package ua.com.alevel.config.jdbc;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
